@@ -1,7 +1,6 @@
 import { createContext, FC, useState, useContext } from 'react'
 
-interface GlobalContext {
-	darkMode: boolean
+interface GlobalContext extends DarkMode {
 	toggleDarkMode: () => void
 }
 
