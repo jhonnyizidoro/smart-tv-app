@@ -6,8 +6,6 @@ interface GrisItemsStyles {
 
 export const GridWrapper = styled.section``
 
-export const GridTitle = styled.h2``
-
 export const GridItems = styled.div<GrisItemsStyles>`
 	display: flex;
 	flex-wrap: wrap;

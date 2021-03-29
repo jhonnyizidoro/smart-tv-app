@@ -1,6 +1,8 @@
 import { FC } from 'react'
 
-import { GridWrapper, GridTitle, GridItems } from './styles'
+import SectionTitle from '../SectionTitle'
+
+import { GridWrapper, GridItems } from './styles'
 
 interface GridProps {
 	title: string
@@ -9,7 +11,7 @@ interface GridProps {
 
 const Grid: FC<GridProps> = ({ title, rowSize, children }) => (
 	<GridWrapper>
-		<GridTitle>{title}</GridTitle>
+		<SectionTitle>{title}</SectionTitle>
 		<GridItems rowSize={rowSize}>{children}</GridItems>
 	</GridWrapper>
 )

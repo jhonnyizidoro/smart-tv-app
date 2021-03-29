@@ -41,5 +41,5 @@ export const GridItemTitle = styled.h3`
 `
 
 export const GridItemSubtitle = styled.span`
-	color: ${colors.gray};
+	color: ${colors.lightGray};
 `

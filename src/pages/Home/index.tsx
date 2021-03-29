@@ -1,7 +1,10 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import { useYoutubeApi } from '../../hooks/youtube-api'
+
 import Grid from '../../components/Grid'
 import GridItem from '../../components/GridItem'
+import List from '../../components/List'
+import ListItem from '../../components/ListItem'
 
 const HomePage: FC = () => {
 	const { getVideosByCategory, getMostPopularVideos } = useYoutubeApi()
@@ -45,6 +48,30 @@ const HomePage: FC = () => {
 					<GridItem video={video} key={video.id} />
 				))}
 			</Grid>
+
+			<List title="Filmes e animações">
+				{movieVideos?.map(video => (
+					<ListItem video={video} key={video.id} />
+				))}
+			</List>
+
+			<List title="Vículos">
+				{vehicleVideos?.map(video => (
+					<ListItem video={video} key={video.id} />
+				))}
+			</List>
+
+			<List title="Músicas">
+				{musicVideos?.map(video => (
+					<ListItem video={video} key={video.id} />
+				))}
+			</List>
+
+			<List title="Animais">
+				{animalVideos?.map(video => (
+					<ListItem video={video} key={video.id} />
+				))}
+			</List>
 		</>
 	)
 }
