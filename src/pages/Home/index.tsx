@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import { useYoutubeApi } from '../../hooks/youtube-api'
 
+import Banner from '../../components/Banner'
 import Grid from '../../components/Grid'
 import GridItem from '../../components/GridItem'
 import List from '../../components/List'
@@ -15,8 +16,9 @@ import {
 } from './styles'
 
 const HomePage: FC = () => {
-	const { getVideosByCategory, getMostPopularVideos } = useYoutubeApi()
+	const { getVideosByCategory, getMostPopularVideos, getVideosById } = useYoutubeApi()
 
+	const [bannerVideo, setBannerVideo] = useState<VideosItem>()
 	const [mostPopularVideos, setMostPopularVideos] = useState<VideosItem[]>()
 	const [movieVideos, setMovieVideos] = useState<VideosItem[]>()
 	const [vehicleVideos, setVehicleVideos] = useState<VideosItem[]>()
@@ -25,12 +27,14 @@ const HomePage: FC = () => {
 
 	const loadInitialData = useCallback(async () => {
 		const [
+			bannerVideoResponse,
 			mostPopularVideosResponse,
 			movieVideosResponse,
 			vehicleVideosResponse,
 			musicVideosResponse,
 			animalVideosResponse,
 		] = await Promise.all([
+			getVideosById('xXiSN8Tftjg'),
 			getMostPopularVideos(9),
 			getVideosByCategory('1', 7),
 			getVideosByCategory('2', 7),
@@ -38,12 +42,13 @@ const HomePage: FC = () => {
 			getVideosByCategory('15', 7),
 		])
 
+		setBannerVideo(bannerVideoResponse.items[0])
 		setMostPopularVideos(mostPopularVideosResponse.items)
 		setMovieVideos(movieVideosResponse.items)
 		setVehicleVideos(vehicleVideosResponse.items)
 		setMusicVideos(musicVideosResponse.items)
 		setAnimalVideos(animalVideosResponse.items)
-	}, [getMostPopularVideos, getVideosByCategory])
+	}, [getMostPopularVideos, getVideosById, getVideosByCategory])
 
 	useEffect(() => {
 		loadInitialData()
@@ -51,6 +56,8 @@ const HomePage: FC = () => {
 
 	return (
 		<>
+			{bannerVideo && <Banner video={bannerVideo} />}
+
 			<HomePageMain>
 				<HomePageMainLeft>
 					<Grid title="Em alta" rowSize={3}>
