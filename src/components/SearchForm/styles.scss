@@ -1,0 +1,35 @@
+@import '../../assets/styles/variables';
+
+.search-form {
+  left: 30px;
+  position: absolute;
+  top: 30px;
+  width: 480px;
+  z-index: 3;
+  &__input {
+    border-radius: 99px;
+    border: 0;
+    outline: 0;
+    transition: 450ms;
+  }
+
+  &__input--collapsed {
+    padding: 18px 28px;
+    width: 50px;
+  }
+
+  &__input--focused {
+    padding: 18px 28px 18px 50px;
+    width: 400px;
+  }
+
+  &__icon__wrapper {
+    left: 16px;
+    position: absolute;
+    top: 15px;
+  }
+
+  &__icon {
+    fill: $lightBlue;
+  }
+}

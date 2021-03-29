@@ -6,7 +6,7 @@ interface BannerProps extends Navegateble {
 	video: VideosItem
 }
 
-const Banner: FC<BannerProps> = ({ video, isFocused, onFocusDown }) => {
+const Banner: FC<BannerProps> = ({ video, isFocused, onFocusDown, onFocusUp }) => {
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			if (!isFocused) {
@@ -19,11 +19,16 @@ const Banner: FC<BannerProps> = ({ video, isFocused, onFocusDown }) => {
 						onFocusDown()
 					}
 					break
+				case 'ArrowUp':
+					if (onFocusUp) {
+						onFocusUp()
+					}
+					break
 				default:
 					break
 			}
 		},
-		[isFocused, onFocusDown]
+		[isFocused, onFocusDown, onFocusUp]
 	)
 
 	useEffect(() => {
@@ -35,7 +40,7 @@ const Banner: FC<BannerProps> = ({ video, isFocused, onFocusDown }) => {
 		<div className={`banner ${isFocused && 'banner--focused'}`}>
 			<iframe
 				className="banner__background"
-				src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=0&mute=1&loop=1`}
+				src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=0&mute=1&loop=1&playlist=${video.id}`}
 				title={video.snippet.title}
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 				allowFullScreen

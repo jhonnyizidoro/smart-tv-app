@@ -6,11 +6,12 @@ import Grid from '../../components/Grid'
 import List from '../../components/List'
 
 import './styles.scss'
+import SearchForm from '../../components/SearchForm'
 
 const HomePage: FC = () => {
 	const { getVideosByCategory, getMostPopularVideos, getVideosById } = useYoutubeApi()
 
-	const [focusedIndex, setFocusedIndex] = useState<number>(1)
+	const [focusedIndex, setFocusedIndex] = useState<number>(3)
 	const [bannerVideo, setBannerVideo] = useState<VideosItem>()
 	const [mostPopularVideos, setMostPopularVideos] = useState<VideosItem[]>()
 	const [movieVideos, setMovieVideos] = useState<VideosItem[]>()
@@ -49,11 +50,14 @@ const HomePage: FC = () => {
 
 	return (
 		<>
+			<SearchForm isFocused={focusedIndex === 2} onFocusDown={() => setFocusedIndex(3)} />
+
 			{bannerVideo && (
 				<Banner
 					video={bannerVideo}
-					isFocused={focusedIndex === 1}
-					onFocusDown={() => setFocusedIndex(2)}
+					isFocused={focusedIndex === 3}
+					onFocusUp={() => setFocusedIndex(2)}
+					onFocusDown={() => setFocusedIndex(4)}
 				/>
 			)}
 
@@ -63,11 +67,11 @@ const HomePage: FC = () => {
 						<Grid
 							columns={3}
 							title="Em alta"
-							isFocused={focusedIndex === 2}
+							isFocused={focusedIndex === 4}
 							videos={mostPopularVideos}
-							onFocusUp={() => setFocusedIndex(1)}
-							onFocusDown={() => setFocusedIndex(4)}
-							onFocusRight={() => setFocusedIndex(3)}
+							onFocusUp={() => setFocusedIndex(3)}
+							onFocusDown={() => setFocusedIndex(6)}
+							onFocusRight={() => setFocusedIndex(5)}
 						/>
 					)}
 				</div>
@@ -77,9 +81,10 @@ const HomePage: FC = () => {
 						<List
 							videos={movieVideos}
 							title="Filmes e animações"
-							isFocused={focusedIndex === 3}
-							onFocusLeft={() => setFocusedIndex(2)}
-							onFocusDown={() => setFocusedIndex(6)}
+							isFocused={focusedIndex === 5}
+							onFocusUp={() => setFocusedIndex(3)}
+							onFocusLeft={() => setFocusedIndex(4)}
+							onFocusDown={() => setFocusedIndex(8)}
 						/>
 					)}
 				</div>
@@ -91,9 +96,9 @@ const HomePage: FC = () => {
 						<List
 							title="Veículos"
 							videos={vehicleVideos}
-							isFocused={focusedIndex === 4}
-							onFocusUp={() => setFocusedIndex(2)}
-							onFocusRight={() => setFocusedIndex(5)}
+							isFocused={focusedIndex === 6}
+							onFocusUp={() => setFocusedIndex(4)}
+							onFocusRight={() => setFocusedIndex(7)}
 						/>
 					)}
 				</div>
@@ -103,10 +108,10 @@ const HomePage: FC = () => {
 						<List
 							title="Músicas"
 							videos={musicVideos}
-							isFocused={focusedIndex === 5}
-							onFocusUp={() => setFocusedIndex(2)}
-							onFocusLeft={() => setFocusedIndex(4)}
-							onFocusRight={() => setFocusedIndex(6)}
+							isFocused={focusedIndex === 7}
+							onFocusUp={() => setFocusedIndex(4)}
+							onFocusLeft={() => setFocusedIndex(6)}
+							onFocusRight={() => setFocusedIndex(8)}
 						/>
 					)}
 				</div>
@@ -114,11 +119,11 @@ const HomePage: FC = () => {
 				<div className="home-page__list">
 					{animalVideos && (
 						<List
-							isFocused={focusedIndex === 6}
+							isFocused={focusedIndex === 8}
 							title="Animais"
 							videos={animalVideos}
-							onFocusUp={() => setFocusedIndex(3)}
-							onFocusLeft={() => setFocusedIndex(5)}
+							onFocusUp={() => setFocusedIndex(5)}
+							onFocusLeft={() => setFocusedIndex(7)}
 						/>
 					)}
 				</div>
