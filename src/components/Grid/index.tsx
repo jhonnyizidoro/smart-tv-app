@@ -1,19 +1,17 @@
 import { FC } from 'react'
+import './styles.scss'
 
 import SectionTitle from '../SectionTitle'
 
-import { GridWrapper, GridItems } from './styles'
-
 interface GridProps {
 	title: string
-	rowSize: number
 }
 
-const Grid: FC<GridProps> = ({ title, rowSize, children }) => (
-	<GridWrapper>
+const Grid: FC<GridProps> = ({ title, children }) => (
+	<div className="grid">
 		<SectionTitle>{title}</SectionTitle>
-		<GridItems rowSize={rowSize}>{children}</GridItems>
-	</GridWrapper>
+		<div className="grid__items">{children}</div>
+	</div>
 )
 
 export default Grid

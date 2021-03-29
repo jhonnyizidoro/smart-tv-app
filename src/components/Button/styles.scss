@@ -1,0 +1,19 @@
+@import '../../assets/styles/variables';
+
+.button {
+  border: 0;
+  border-radius: 99px;
+  font-weight: $fontBold;
+  outline: 0;
+  padding: 7px 35px;
+
+  &--blue {
+    background: $blue;
+    color: $white;
+  }
+
+  &--white {
+    background: $white;
+    color: $blue;
+  }
+}

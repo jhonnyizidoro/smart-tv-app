@@ -1,9 +1,6 @@
 import { FC } from 'react'
+import './styles.scss'
 
-import { SectionTitleElement } from './styles'
-
-const SectionTitle: FC = ({ children }) => (
-	<SectionTitleElement>{children}</SectionTitleElement>
-)
+const SectionTitle: FC = ({ children }) => <h2 className="section-title">{children}</h2>
 
 export default SectionTitle

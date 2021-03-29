@@ -1,31 +1,26 @@
 import { FC } from 'react'
-
-import {
-	ListItemWrapper,
-	ListItemElement,
-	ListItemImage,
-	ListItemContent,
-	ListItemTitle,
-	ListItemSubtitle,
-} from './styles'
+import './styles.scss'
 
 interface ListItemProps {
 	video: VideosItem
 }
 
 const ListItem: FC<ListItemProps> = ({ video }) => (
-	<ListItemWrapper>
-		<ListItemElement>
-			<ListItemImage
+	<li className="list-item">
+		<div className="list-item__content">
+			<img
+				className="list-item__image"
 				src={video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url}
 				alt={`Thumbnail ${video.snippet.title}`}
 			/>
-			<ListItemContent>
-				<ListItemTitle>{video.snippet.title}</ListItemTitle>
-				<ListItemSubtitle>{video.statistics.viewCount} visualizações</ListItemSubtitle>
-			</ListItemContent>
-		</ListItemElement>
-	</ListItemWrapper>
+			<div className="list-item__text">
+				<h2 className="list-item__title">{video.snippet.title}</h2>
+				<span className="list-item__subtitle">
+					{video.statistics.viewCount} visualizações
+				</span>
+			</div>
+		</div>
+	</li>
 )
 
 export default ListItem

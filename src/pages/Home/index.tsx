@@ -7,13 +7,7 @@ import GridItem from '../../components/GridItem'
 import List from '../../components/List'
 import ListItem from '../../components/ListItem'
 
-import {
-	HomePageMain,
-	HomePageMainLeft,
-	HomePageMainRight,
-	HomePageList,
-	HomePageLists,
-} from './styles'
+import './styles.scss'
 
 const HomePage: FC = () => {
 	const { getVideosByCategory, getMostPopularVideos, getVideosById } = useYoutubeApi()
@@ -58,46 +52,46 @@ const HomePage: FC = () => {
 		<>
 			{bannerVideo && <Banner video={bannerVideo} />}
 
-			<HomePageMain>
-				<HomePageMainLeft>
-					<Grid title="Em alta" rowSize={3}>
+			<div className="home-page__main">
+				<div className="home-page__main__left">
+					<Grid title="Em alta">
 						{mostPopularVideos?.map(video => (
-							<GridItem video={video} key={video.id} />
+							<GridItem video={video} key={video.id} size="third" />
 						))}
 					</Grid>
-				</HomePageMainLeft>
-				<HomePageMainRight>
+				</div>
+				<div className="home-page__main__right">
 					<List title="Filmes e animações">
 						{movieVideos?.map(video => (
 							<ListItem video={video} key={video.id} />
 						))}
 					</List>
-				</HomePageMainRight>
-			</HomePageMain>
+				</div>
+			</div>
 
-			<HomePageLists>
-				<HomePageList>
+			<div className="home-page__lists">
+				<div className="home-page__list">
 					<List title="Veículos">
 						{vehicleVideos?.map(video => (
 							<ListItem video={video} key={video.id} />
 						))}
 					</List>
-				</HomePageList>
-				<HomePageList>
+				</div>
+				<div className="home-page__list">
 					<List title="Músicas">
 						{musicVideos?.map(video => (
 							<ListItem video={video} key={video.id} />
 						))}
 					</List>
-				</HomePageList>
-				<HomePageList>
+				</div>
+				<div className="home-page__list">
 					<List title="Animais">
 						{animalVideos?.map(video => (
 							<ListItem video={video} key={video.id} />
 						))}
 					</List>
-				</HomePageList>
-			</HomePageLists>
+				</div>
+			</div>
 		</>
 	)
 }

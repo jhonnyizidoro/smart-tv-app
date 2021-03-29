@@ -1,0 +1,25 @@
+.home-page {
+
+  &__main {
+    display: flex;
+    margin: 50px 0;
+  }
+
+  &__main__left {
+    width: 70%;
+  }
+
+  &__main__right {
+    width: 30%;
+  }
+
+  &__lists {
+    display: flex;
+    margin-bottom: 50px;
+  }
+
+  &__list {
+    width: percentage(1 / 3);
+  }
+
+}

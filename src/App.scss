@@ -1,0 +1,13 @@
+@import './assets/styles/variables';
+
+.content {
+  min-height: 100vh;
+
+  &--white {
+    background: $light;
+  }
+
+  &--dark {
+    background: $dark;
+  }
+}

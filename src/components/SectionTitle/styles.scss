@@ -1,0 +1,20 @@
+@import '../../assets/styles/variables';
+
+.section-title {
+  color: $lightBlue;
+  font-size: 1.2rem;
+  padding-left: 30px;
+  position: relative;
+
+  &::before {
+    background: $blue;
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 8px;
+    left: 15px;
+    position: absolute;
+    top: 4px;
+    width: 8px;
+  }
+}
