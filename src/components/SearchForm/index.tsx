@@ -3,7 +3,7 @@ import './styles.scss'
 
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
 
-const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown }) => {
+const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) => {
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			if (!isFocused) {
@@ -14,6 +14,11 @@ const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown }) => {
 				case 'ArrowDown':
 					if (onFocusDown) {
 						onFocusDown()
+					}
+					break
+				case 'ArrowLeft':
+					if (onFocusLeft) {
+						onFocusLeft()
 					}
 					break
 				default:

@@ -53,7 +53,11 @@ const HomePage: FC = () => {
 		<>
 			<Menu isFocused={focusedIndex === 1} onFocusRight={() => setFocusedIndex(3)} />
 
-			<SearchForm isFocused={focusedIndex === 2} onFocusDown={() => setFocusedIndex(3)} />
+			<SearchForm
+				isFocused={focusedIndex === 2}
+				onFocusDown={() => setFocusedIndex(3)}
+				onFocusLeft={() => setFocusedIndex(1)}
+			/>
 
 			{bannerVideo && (
 				<Banner
