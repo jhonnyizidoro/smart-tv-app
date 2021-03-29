@@ -1,5 +1,14 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { colors, fonts } from '../../assets/styles/variables'
+
+const zoomBackgroundVideoIn = keyframes`
+  from {
+    transform: scale(1.3);
+  }
+  to {
+    transform: scale(1);
+  }
+`
 
 export const BannerWrapper = styled.div`
 	border-radius: 0 0 35px 35px;
@@ -11,6 +20,7 @@ export const BannerWrapper = styled.div`
 `
 
 export const BannerBackground = styled.iframe`
+	animation: ${zoomBackgroundVideoIn} 30s forwards;
 	height: 100%;
 	position: absolute;
 	right: 0;
