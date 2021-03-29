@@ -8,7 +8,13 @@ interface VideosItem {
 	id: string
 	etag: string
 	kind: string
-	statistics: VideoStatistics
+	statistics: {
+		viewCount: string
+		likeCount: string
+		dislikeCount: string
+		favoriteCount: string
+		commentCount: string
+	}
 	snippet: {
 		title: string
 		categoryId: string
@@ -21,7 +27,7 @@ interface VideosItem {
 		thumbnails: {
 			default: VideosThumbnail
 			high: VideosThumbnail
-			maxres: VideosThumbnail
+			maxres?: VideosThumbnail
 			medium: VideosThumbnail
 			standard: VideosThumbnail
 		}

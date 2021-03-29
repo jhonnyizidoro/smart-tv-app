@@ -32,6 +32,10 @@ const GlobalStyles = createGlobalStyle<DarkMode>`
     font-weight: 700;
   }
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     ${getBodyBackgroundColor};
   }
