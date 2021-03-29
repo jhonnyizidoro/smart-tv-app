@@ -16,7 +16,7 @@ export const ListItemElement = styled.li`
 
 export const ListItemImage = styled.img`
 	border-radius: 7px;
-	height: 75px;
+	height: 70px;
 	margin-right: 15px;
 `
 
@@ -26,6 +26,8 @@ export const ListItemTitle = styled.h3`
 	color: ${colors.dark};
 	line-height: 1.3;
 	margin-bottom: 5px;
+	max-height: 40px;
+	overflow: hidden;
 `
 
 export const ListItemSubtitle = styled.span`
