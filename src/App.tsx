@@ -15,7 +15,7 @@ const App: FC = () => {
 	const { darkMode } = useGlobalContext()
 
 	return (
-		<div className={darkMode ? 'content--white' : 'content-dark'}>
+		<div className={darkMode ? 'content--dark' : 'content--light'}>
 			<BrowserRouter>
 				<Switch>
 					<Route exact component={HomePage} path="/" />
