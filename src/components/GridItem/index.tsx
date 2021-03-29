@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import './styles.scss'
 
-interface GridItemProps {
+interface GridItemProps extends Navegateble {
 	video: VideosItem
-	size: 'full' | 'half' | 'quarter' | 'third'
+	size: 'quarter' | 'third'
 }
 
-const GridItem: FC<GridItemProps> = ({ video, size }) => (
-	<div className={`grid-item grid-item--${size}`}>
+const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => (
+	<div className={`grid-item grid-item--${size} ${isFocused && 'grid-item--focused'}`}>
 		<div className="grid-item__content">
 			<figure className="grid-item__image__wrapper">
 				<img

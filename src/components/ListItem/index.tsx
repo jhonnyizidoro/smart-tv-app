@@ -3,10 +3,11 @@ import './styles.scss'
 
 interface ListItemProps {
 	video: VideosItem
+	isFocused: boolean
 }
 
-const ListItem: FC<ListItemProps> = ({ video }) => (
-	<li className="list-item">
+const ListItem: FC<ListItemProps> = ({ video, isFocused }) => (
+	<li className={`list-item ${isFocused && 'list-item--focused'}`}>
 		<div className="list-item__content">
 			<img
 				className="list-item__image"

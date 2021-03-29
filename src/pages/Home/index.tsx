@@ -3,15 +3,14 @@ import { useYoutubeApi } from '../../hooks/youtube-api'
 
 import Banner from '../../components/Banner'
 import Grid from '../../components/Grid'
-import GridItem from '../../components/GridItem'
 import List from '../../components/List'
-import ListItem from '../../components/ListItem'
 
 import './styles.scss'
 
 const HomePage: FC = () => {
 	const { getVideosByCategory, getMostPopularVideos, getVideosById } = useYoutubeApi()
 
+	const [focusedIndex, setFocusedIndex] = useState<number>(1)
 	const [bannerVideo, setBannerVideo] = useState<VideosItem>()
 	const [mostPopularVideos, setMostPopularVideos] = useState<VideosItem[]>()
 	const [movieVideos, setMovieVideos] = useState<VideosItem[]>()
@@ -50,46 +49,78 @@ const HomePage: FC = () => {
 
 	return (
 		<>
-			{bannerVideo && <Banner video={bannerVideo} />}
+			{bannerVideo && (
+				<Banner
+					video={bannerVideo}
+					isFocused={focusedIndex === 1}
+					onFocusDown={() => setFocusedIndex(2)}
+				/>
+			)}
 
 			<div className="home-page__main">
 				<div className="home-page__main__left">
-					<Grid title="Em alta">
-						{mostPopularVideos?.map(video => (
-							<GridItem video={video} key={video.id} size="third" />
-						))}
-					</Grid>
+					{mostPopularVideos && (
+						<Grid
+							columns={3}
+							title="Em alta"
+							isFocused={focusedIndex === 2}
+							videos={mostPopularVideos}
+							onFocusUp={() => setFocusedIndex(1)}
+							onFocusDown={() => setFocusedIndex(4)}
+							onFocusRight={() => setFocusedIndex(3)}
+						/>
+					)}
 				</div>
+
 				<div className="home-page__main__right">
-					<List title="Filmes e animações">
-						{movieVideos?.map(video => (
-							<ListItem video={video} key={video.id} />
-						))}
-					</List>
+					{movieVideos && (
+						<List
+							videos={movieVideos}
+							title="Filmes e animações"
+							isFocused={focusedIndex === 3}
+							onFocusLeft={() => setFocusedIndex(2)}
+							onFocusDown={() => setFocusedIndex(6)}
+						/>
+					)}
 				</div>
 			</div>
 
 			<div className="home-page__lists">
 				<div className="home-page__list">
-					<List title="Veículos">
-						{vehicleVideos?.map(video => (
-							<ListItem video={video} key={video.id} />
-						))}
-					</List>
+					{vehicleVideos && (
+						<List
+							title="Veículos"
+							videos={vehicleVideos}
+							isFocused={focusedIndex === 4}
+							onFocusUp={() => setFocusedIndex(2)}
+							onFocusRight={() => setFocusedIndex(5)}
+						/>
+					)}
 				</div>
+
 				<div className="home-page__list">
-					<List title="Músicas">
-						{musicVideos?.map(video => (
-							<ListItem video={video} key={video.id} />
-						))}
-					</List>
+					{musicVideos && (
+						<List
+							title="Músicas"
+							videos={musicVideos}
+							isFocused={focusedIndex === 5}
+							onFocusUp={() => setFocusedIndex(2)}
+							onFocusLeft={() => setFocusedIndex(4)}
+							onFocusRight={() => setFocusedIndex(6)}
+						/>
+					)}
 				</div>
+
 				<div className="home-page__list">
-					<List title="Animais">
-						{animalVideos?.map(video => (
-							<ListItem video={video} key={video.id} />
-						))}
-					</List>
+					{animalVideos && (
+						<List
+							isFocused={focusedIndex === 6}
+							title="Animais"
+							videos={animalVideos}
+							onFocusUp={() => setFocusedIndex(3)}
+							onFocusLeft={() => setFocusedIndex(5)}
+						/>
+					)}
 				</div>
 			</div>
 		</>

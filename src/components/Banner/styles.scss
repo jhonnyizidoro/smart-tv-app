@@ -17,6 +17,10 @@
   position: relative;
   width: calc(100vw - 40px);
 
+  &--focused {
+    border: 3px solid red;
+  }
+
   &__background {
     animation: zoomBackgroundVideoIn 30s forwards;
     height: 100%;

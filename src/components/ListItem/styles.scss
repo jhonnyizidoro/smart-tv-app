@@ -3,6 +3,10 @@
 .list-item {
   padding: 15px;
 
+  &--focused {
+    border: 3px solid red;
+  }
+
   &__content {
     align-items: center;
     background: $white;
