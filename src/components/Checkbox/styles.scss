@@ -1,0 +1,40 @@
+@import '../../assets/styles/variables';
+
+.checkbox {
+
+  border-radius: 99px;
+  height: 25px;
+  margin-left: 10px;
+  position: relative;
+  transition: 300ms;
+  width: 50px;
+
+  &--on {
+    background: $blue;
+    border: 2px solid $blue;
+  }
+
+  &--off {
+    border: 2px solid $lighterGray;
+  }
+
+  &__bullet {
+    border-radius: 50%;
+    height: 16px;
+    position: absolute;
+    top: 2px;
+    transition: 300ms;
+    width: 16px;
+  }
+
+  &__bullet--on {
+    background: $white;
+    right: 2px;
+  }
+
+  &__bullet--off {
+    background: $lighterGray;
+    right: 27px;
+  }
+
+}

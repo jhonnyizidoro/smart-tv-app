@@ -1,8 +1,9 @@
 import { FC, useCallback, useEffect, useState } from 'react'
-import './styles.scss'
 
 import SectionTitle from '../SectionTitle'
 import GridItem from '../GridItem'
+
+import './styles.scss'
 
 interface GridProps extends Navegateble {
 	title: string

@@ -4,9 +4,10 @@ import { useYoutubeApi } from '../../hooks/youtube-api'
 import Banner from '../../components/Banner'
 import Grid from '../../components/Grid'
 import List from '../../components/List'
+import SearchForm from '../../components/SearchForm'
+import Menu from '../../components/Menu'
 
 import './styles.scss'
-import SearchForm from '../../components/SearchForm'
 
 const HomePage: FC = () => {
 	const { getVideosByCategory, getMostPopularVideos, getVideosById } = useYoutubeApi()
@@ -50,6 +51,8 @@ const HomePage: FC = () => {
 
 	return (
 		<>
+			<Menu isFocused={focusedIndex === 1} onFocusRight={() => setFocusedIndex(3)} />
+
 			<SearchForm isFocused={focusedIndex === 2} onFocusDown={() => setFocusedIndex(3)} />
 
 			{bannerVideo && (
@@ -58,6 +61,7 @@ const HomePage: FC = () => {
 					isFocused={focusedIndex === 3}
 					onFocusUp={() => setFocusedIndex(2)}
 					onFocusDown={() => setFocusedIndex(4)}
+					onFocusLeft={() => setFocusedIndex(1)}
 				/>
 			)}
 
@@ -71,6 +75,7 @@ const HomePage: FC = () => {
 							videos={mostPopularVideos}
 							onFocusUp={() => setFocusedIndex(3)}
 							onFocusDown={() => setFocusedIndex(6)}
+							onFocusLeft={() => setFocusedIndex(1)}
 							onFocusRight={() => setFocusedIndex(5)}
 						/>
 					)}
@@ -98,6 +103,7 @@ const HomePage: FC = () => {
 							videos={vehicleVideos}
 							isFocused={focusedIndex === 6}
 							onFocusUp={() => setFocusedIndex(4)}
+							onFocusLeft={() => setFocusedIndex(1)}
 							onFocusRight={() => setFocusedIndex(7)}
 						/>
 					)}

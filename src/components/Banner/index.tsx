@@ -1,12 +1,20 @@
 import { FC, useCallback, useEffect } from 'react'
+
 import Button from '../Button'
+
 import './styles.scss'
 
 interface BannerProps extends Navegateble {
 	video: VideosItem
 }
 
-const Banner: FC<BannerProps> = ({ video, isFocused, onFocusDown, onFocusUp }) => {
+const Banner: FC<BannerProps> = ({
+	video,
+	isFocused,
+	onFocusDown,
+	onFocusUp,
+	onFocusLeft,
+}) => {
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			if (!isFocused) {
@@ -24,11 +32,16 @@ const Banner: FC<BannerProps> = ({ video, isFocused, onFocusDown, onFocusUp }) =
 						onFocusUp()
 					}
 					break
+				case 'ArrowLeft':
+					if (onFocusLeft) {
+						onFocusLeft()
+					}
+					break
 				default:
 					break
 			}
 		},
-		[isFocused, onFocusDown, onFocusUp]
+		[isFocused, onFocusDown, onFocusLeft, onFocusUp]
 	)
 
 	useEffect(() => {

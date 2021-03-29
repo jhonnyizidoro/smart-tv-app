@@ -1,4 +1,5 @@
 import { FC } from 'react'
+
 import './styles.scss'
 
 interface GridItemProps extends Navegateble {
