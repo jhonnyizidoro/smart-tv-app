@@ -2,10 +2,15 @@
 
 .comment {
   display: flex;
-  margin: 35px 0;
+  margin: 15px 0;
+  padding: 20px 40px 20px 0;
+  transition: 1s;
 
   &--focused {
-    border: 3px solid red;
+    background: $white;
+    border-radius: 25px;
+    box-shadow: 12px 18px 20px rgba(0, 0, 0, 0.06);
+    padding: 20px;
   }
 
   &__image__wrapper {}

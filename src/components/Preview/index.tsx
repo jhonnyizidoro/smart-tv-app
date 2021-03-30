@@ -35,7 +35,7 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 					break
 			}
 		},
-		[isFocused, onFocusUp]
+		[isFocused, onFocusUp, redirectToVideoPage]
 	)
 
 	useEffect(() => {

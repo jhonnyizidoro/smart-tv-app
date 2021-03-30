@@ -49,7 +49,7 @@ const ReturnLink: FC<Navegateble> = ({
 					break
 			}
 		},
-		[goBack, isFocused, onFocusDown, onFocusRight, onFocusUp]
+		[goBack, isFocused, onFocusDown, onFocusLeft, onFocusRight, onFocusUp]
 	)
 
 	useEffect(() => {

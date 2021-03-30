@@ -52,7 +52,7 @@ const Comments: FC<CommentsProps> = ({
 					break
 			}
 		},
-		[focusedIndex, isFocused, onFocusLeft, onFocusRight, onFocusUp]
+		[comments.length, focusedIndex, isFocused, onFocusLeft, onFocusRight, onFocusUp]
 	)
 
 	useEffect(() => {
