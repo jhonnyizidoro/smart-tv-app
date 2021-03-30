@@ -7,9 +7,10 @@ import Preview from '../../components/Preview'
 import ReturnLink from '../../components/ReturnLink'
 import SearchForm from '../../components/SearchForm'
 import Menu from '../../components/Menu'
+import VideoWatch from '../../components/VideoWatch'
+import VideoStatistics from '../../components/VideoStatistics'
 
 import './styles.scss'
-import VideoWatch from '../../components/VideoWatch'
 
 interface VideoPageParams {
 	id: string
@@ -19,7 +20,7 @@ const VideoPage: FC = () => {
 	const { getVideosById, getVideosByCategory, getCommentsByVideoId } = useYoutubeApi()
 	const { id } = useParams<VideoPageParams>()
 
-	const [focusedIndex, setFocusedIndex] = useState<number>(7)
+	const [focusedIndex, setFocusedIndex] = useState<number>(4)
 	const [previewVideo, setPreviewVideo] = useState<VideosItem | null>()
 	const [focusedIndexBeforePreview, setFocusedIndexBeforePreview] = useState<number>(3)
 	const [focusedIndexBeforeMenu, setFocusedIndexBeforeMenu] = useState<number>(3)
@@ -97,6 +98,8 @@ const VideoPage: FC = () => {
 							onFocusRight={() => setFocusedIndex(7)}
 						/>
 					)}
+
+					{video && <VideoStatistics video={video} />}
 				</div>
 				<div className="video-page__similar">
 					{similarVideos && (
