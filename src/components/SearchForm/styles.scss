@@ -1,5 +1,16 @@
 @import '../../assets/styles/variables';
 
+@keyframes showSearchFormKeyboard {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .search-form {
   border-radius: 99px;
   box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.06);
@@ -33,5 +44,16 @@
 
   &__icon {
     fill: $lightBlue;
+  }
+
+  &__keyboard {
+    animation: showSearchFormKeyboard 1s forwards;
+    background: #ECECEC;
+    bottom: 0;
+    box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+    position: fixed;
+    width: 100%;
+    z-index: 4;
   }
 }
