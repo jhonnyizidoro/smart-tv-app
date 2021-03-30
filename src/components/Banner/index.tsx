@@ -49,6 +49,16 @@ const Banner: FC<BannerProps> = ({
 		return () => document.removeEventListener('keydown', handleKeyDown)
 	}, [handleKeyDown])
 
+	useEffect(() => {
+		if (isFocused) {
+			window.scrollBy({
+				left: 0,
+				top: -window.innerHeight,
+				behavior: 'smooth',
+			})
+		}
+	}, [isFocused])
+
 	return (
 		<div className={`banner ${isFocused && 'banner--focused'}`}>
 			<iframe
