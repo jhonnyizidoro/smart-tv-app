@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Button from '../Button'
 
@@ -8,6 +9,12 @@ interface PreviewProps extends Navegateble {
 	video: VideosItem
 }
 const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
+	const { push } = useHistory()
+
+	const redirectToVideoPage = useCallback(() => {
+		push(`/watch/${video.id}`)
+	}, [push, video])
+
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			if (!isFocused) {
@@ -19,6 +26,10 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 					if (onFocusUp) {
 						onFocusUp()
 					}
+					break
+				case 'Enter':
+				case 'NumpadEnter':
+					redirectToVideoPage()
 					break
 				default:
 					break
@@ -43,7 +54,7 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 				<div className="preview__title">{video.snippet.title}</div>
 				<div className="preview__text">{video.snippet.description.slice(0, 250)}...</div>
 				<div className="preview__buttons">
-					<Button isBlue={false} isFocused>
+					<Button isBlue={false} isFocused onClick={redirectToVideoPage}>
 						Assistir
 					</Button>
 				</div>

@@ -5,6 +5,7 @@ interface UseYoutubeApi {
 	getVideosByCategory: (categoryId: string, maxResults: number) => Promise<VideosResponse>
 	getMostPopularVideos: (maxResults: number) => Promise<VideosResponse>
 	getVideosById: (id: string) => Promise<VideosResponse>
+	getCommentsByVideoId: (videoId: string) => Promise<CommentsResponse>
 }
 
 export const useYoutubeApi = (): UseYoutubeApi => {
@@ -42,10 +43,17 @@ export const useYoutubeApi = (): UseYoutubeApi => {
 		)
 	}
 
+	const getCommentsByVideoId = async (videoId: string): Promise<CommentsResponse> => {
+		return await sendRequestToYoutubeApi<CommentsResponse>(
+			`commentThreads?part=snippet&videoId=${videoId}`
+		)
+	}
+
 	return {
 		getCategories: useCallback(getCategories, []),
 		getVideosByCategory: useCallback(getVideosByCategory, []),
 		getMostPopularVideos: useCallback(getMostPopularVideos, []),
 		getVideosById: useCallback(getVideosById, []),
+		getCommentsByVideoId: useCallback(getCommentsByVideoId, []),
 	}
 }

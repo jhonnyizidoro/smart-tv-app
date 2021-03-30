@@ -1,0 +1,11 @@
+.video-page {
+  display: flex;
+
+  &__content {
+    width: 70%;
+  }
+
+  &__similar {
+    width: 30%;
+  }
+}

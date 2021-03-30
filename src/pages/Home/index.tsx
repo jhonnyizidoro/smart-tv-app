@@ -17,6 +17,7 @@ const HomePage: FC = () => {
 	const [previewVideo, setPreviewVideo] = useState<VideosItem | null>()
 	const [focusedIndexBeforePreview, setFocusedIndexBeforePreview] = useState<number>(3)
 	const [focusedIndexBeforeMenu, setFocusedIndexBeforeMenu] = useState<number>(3)
+
 	const [bannerVideo, setBannerVideo] = useState<VideosItem>()
 	const [mostPopularVideos, setMostPopularVideos] = useState<VideosItem[]>()
 	const [movieVideos, setMovieVideos] = useState<VideosItem[]>()
