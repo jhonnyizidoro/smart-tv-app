@@ -9,18 +9,28 @@ interface GlobalContext extends DarkMode {
 const GlobalContext = createContext<GlobalContext>({} as GlobalContext)
 
 export const GlobalProvider: FC = ({ children }) => {
-	const [darkMode, setDarkMode] = useState<boolean>(false)
-	const [favorites, setFavorites] = useState<string[]>([])
+	const storedFavorites = localStorage.getItem('favorites')
+	const favoritesInit = storedFavorites?.split(',') || []
 
-	const toggleDarkMode = () => setDarkMode(!darkMode)
+	const storedDarkMode = localStorage.getItem('darkMode')
+	const darkModeInit = storedDarkMode === 'true'
+
+	const [darkMode, setDarkMode] = useState<boolean>(darkModeInit)
+	const [favorites, setFavorites] = useState<string[]>(favoritesInit)
+
+	const toggleDarkMode = () => {
+		localStorage.setItem('darkMode', String(!darkMode))
+		setDarkMode(!darkMode)
+	}
 
 	const toggleFromFavorites = useCallback(
 		(videoId: string) => {
-			if (favorites.includes(videoId)) {
-				setFavorites(favorites.filter(favoriteVideoId => favoriteVideoId !== videoId))
-			} else {
-				setFavorites([...favorites, videoId])
-			}
+			const newFavorites = favorites.includes(videoId)
+				? favorites.filter(favoriteVideoId => favoriteVideoId !== videoId)
+				: [...favorites, videoId]
+
+			setFavorites(newFavorites)
+			localStorage.setItem('favorites', newFavorites.join(','))
 		},
 		[favorites]
 	)
