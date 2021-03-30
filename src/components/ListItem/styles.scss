@@ -3,10 +3,6 @@
 .list-item {
   padding: 15px;
 
-  &--focused {
-    border: 3px solid red;
-  }
-
   &__content {
     align-items: center;
     background: $white;
@@ -14,6 +10,12 @@
     box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.06);
     display: flex;
     padding: 20px;
+    transition: 450ms;
+  }
+
+  &__content--focused {
+    box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.12), 0 0 0 3px $blue;
+    transform: scale(1.05) translateY(-10px);
   }
 
   &__image {

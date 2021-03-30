@@ -60,7 +60,7 @@ const Banner: FC<BannerProps> = ({
 	}, [isFocused])
 
 	return (
-		<div className={`banner ${isFocused && 'banner--focused'}`}>
+		<div className="banner">
 			<iframe
 				className="banner__background"
 				src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=0&mute=1&loop=1&playlist=${video.id}`}
@@ -69,10 +69,15 @@ const Banner: FC<BannerProps> = ({
 				allowFullScreen
 			/>
 			<div className="banner__gradient__overlay" />
-			<div className="banner__content">
+			<div className={`banner__content ${isFocused && 'banner__content--focused'}`}>
 				<div className="banner__text">Em alta</div>
 				<h1 className="banner__title">{video.snippet.title}</h1>
-				<Button isBlue aria-label={`assistir ${video.snippet.title}`} type="button">
+				<Button
+					isBlue
+					aria-label={`assistir ${video.snippet.title}`}
+					type="button"
+					isFocused={isFocused}
+				>
 					Assistir
 				</Button>
 			</div>

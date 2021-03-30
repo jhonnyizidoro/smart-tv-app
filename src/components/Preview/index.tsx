@@ -43,7 +43,9 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 				<div className="preview__title">{video.snippet.title}</div>
 				<div className="preview__text">{video.snippet.description.slice(0, 250)}...</div>
 				<div className="preview__buttons">
-					<Button isBlue={false}>Assistir</Button>
+					<Button isBlue={false} isFocused>
+						Assistir
+					</Button>
 				</div>
 			</div>
 			<div className="preview__video__overlay" />

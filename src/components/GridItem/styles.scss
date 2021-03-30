@@ -7,16 +7,18 @@
     width: percentage(1 / 3);
   }
 
-  &--focused {
-    border: 3px solid red;
-  }
-
   &__content {
     background: $white;
     border-radius: 7px;
     box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.06);
     height: 100%;
     overflow: hidden;
+    transition: 450ms;
+  }
+
+  &__content--focused {
+    box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.12), 0 0 0 3px $blue;
+    transform: scale(1.05) translateY(-10px);
   }
 
   &__image__wrapper {

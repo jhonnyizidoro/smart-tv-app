@@ -26,11 +26,11 @@ const ListItem: FC<ListItemProps> = ({ video, isFocused }) => {
 	}, [isFocused])
 
 	return (
-		<li className={`list-item ${isFocused && 'list-item--focused'}`} ref={ref}>
-			<div className="list-item__content">
+		<li className="list-item" ref={ref}>
+			<div className={`list-item__content ${isFocused && 'list-item__content--focused'}`}>
 				<img
 					className="list-item__image"
-					src={video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url}
+					src={video.snippet.thumbnails.medium.url}
 					alt={`Thumbnail ${video.snippet.title}`}
 				/>
 				<div className="list-item__text">

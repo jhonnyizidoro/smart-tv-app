@@ -26,17 +26,12 @@ const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
 	}, [isFocused])
 
 	return (
-		<div
-			className={`grid-item grid-item--${size} ${isFocused && 'grid-item--focused'}`}
-			ref={ref}
-		>
-			<div className="grid-item__content">
+		<div className={`grid-item grid-item--${size}`} ref={ref}>
+			<div className={`grid-item__content ${isFocused && 'grid-item__content--focused'}`}>
 				<figure className="grid-item__image__wrapper">
 					<img
 						className="grid-item__image"
-						src={
-							video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url
-						}
+						src={video.snippet.thumbnails.high.url}
 						alt={`Thumbnail ${video.snippet.title}`}
 					/>
 				</figure>
