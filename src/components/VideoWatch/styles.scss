@@ -1,0 +1,22 @@
+@import '../../assets/styles/variables';
+
+.video-watch {
+  border-radius: 10px;
+  box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  padding-top: 55%;
+  position: relative;
+  transition: 250ms;
+
+  &--focused {
+    border: 3px solid $blue;
+  }
+
+  &__iframe {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+  }
+}

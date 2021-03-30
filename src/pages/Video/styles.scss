@@ -1,7 +1,9 @@
 .video-page {
   display: flex;
+  padding-top: 120px;
 
   &__content {
+    padding: 0 10px 0 30px;
     width: 70%;
   }
 

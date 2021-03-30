@@ -1,13 +1,15 @@
 @import '../../assets/styles/variables';
 
 .search-form {
+  border-radius: 99px;
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.06);
   left: 30px;
+  overflow: hidden;
   position: absolute;
   top: 30px;
-  width: 480px;
   z-index: 3;
+
   &__input {
-    border-radius: 99px;
     border: 0;
     outline: 0;
     transition: 450ms;

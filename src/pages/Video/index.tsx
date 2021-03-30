@@ -4,8 +4,12 @@ import { useYoutubeApi } from '../../hooks/youtube-api'
 
 import List from '../../components/List'
 import Preview from '../../components/Preview'
+import ReturnLink from '../../components/ReturnLink'
+import SearchForm from '../../components/SearchForm'
+import Menu from '../../components/Menu'
 
 import './styles.scss'
+import VideoWatch from '../../components/VideoWatch'
 
 interface VideoPageParams {
 	id: string
@@ -18,6 +22,7 @@ const VideoPage: FC = () => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(7)
 	const [previewVideo, setPreviewVideo] = useState<VideosItem | null>()
 	const [focusedIndexBeforePreview, setFocusedIndexBeforePreview] = useState<number>(3)
+	const [focusedIndexBeforeMenu, setFocusedIndexBeforeMenu] = useState<number>(3)
 
 	const [video, setVideo] = useState<VideosItem>()
 	const [similarVideos, setSimilarVideos] = useState<VideosItem[]>()
@@ -37,6 +42,15 @@ const VideoPage: FC = () => {
 
 		setSimilarVideos(similarVideosResponse.items)
 	}, [getCommentsByVideoId, getVideosByCategory, getVideosById, id])
+
+	const showMenu = useCallback(() => {
+		setFocusedIndexBeforeMenu(focusedIndex)
+		setFocusedIndex(1)
+	}, [focusedIndex])
+
+	const hideMenu = useCallback(() => {
+		setFocusedIndex(focusedIndexBeforeMenu)
+	}, [focusedIndexBeforeMenu])
 
 	const showPreview = useCallback(
 		(video: VideosItem) => {
@@ -58,8 +72,32 @@ const VideoPage: FC = () => {
 
 	return (
 		<>
+			<Menu isFocused={focusedIndex === 1} onFocusRight={() => hideMenu()} />
+
+			<SearchForm
+				isFocused={focusedIndex === 2}
+				onFocusLeft={() => showMenu()}
+				onFocusDown={() => setFocusedIndex(3)}
+			/>
+
 			<div className="video-page">
-				<div className="video-page__content">*</div>
+				<div className="video-page__content">
+					<ReturnLink
+						isFocused={focusedIndex === 3}
+						onFocusUp={() => setFocusedIndex(2)}
+						onFocusDown={() => setFocusedIndex(4)}
+						onFocusRight={() => setFocusedIndex(7)}
+					/>
+
+					{video && (
+						<VideoWatch
+							video={video}
+							isFocused={focusedIndex === 4}
+							onFocusUp={() => setFocusedIndex(3)}
+							onFocusRight={() => setFocusedIndex(7)}
+						/>
+					)}
+				</div>
 				<div className="video-page__similar">
 					{similarVideos && (
 						<List
@@ -67,6 +105,7 @@ const VideoPage: FC = () => {
 							videos={similarVideos}
 							onItemSelect={showPreview}
 							isFocused={focusedIndex === 7}
+							onFocusLeft={() => setFocusedIndex(4)}
 						/>
 					)}
 				</div>
