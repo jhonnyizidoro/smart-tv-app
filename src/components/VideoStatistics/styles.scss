@@ -4,6 +4,10 @@
   border-bottom: 1px solid $lighterGray;
   padding: 20px 0;
 
+  &--focused {
+    border: 3px solid red;
+  }
+
   &__title {
     color: $dark;
     font-size: 1.4rem;

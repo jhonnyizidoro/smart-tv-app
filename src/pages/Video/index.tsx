@@ -11,6 +11,7 @@ import VideoWatch from '../../components/VideoWatch'
 import VideoStatistics from '../../components/VideoStatistics'
 
 import './styles.scss'
+import Comments from '../../components/Comments'
 
 interface VideoPageParams {
 	id: string
@@ -85,6 +86,7 @@ const VideoPage: FC = () => {
 				<div className="video-page__content">
 					<ReturnLink
 						isFocused={focusedIndex === 3}
+						onFocusLeft={() => showMenu()}
 						onFocusUp={() => setFocusedIndex(2)}
 						onFocusDown={() => setFocusedIndex(4)}
 						onFocusRight={() => setFocusedIndex(7)}
@@ -94,12 +96,33 @@ const VideoPage: FC = () => {
 						<VideoWatch
 							video={video}
 							isFocused={focusedIndex === 4}
+							onFocusLeft={() => showMenu()}
 							onFocusUp={() => setFocusedIndex(3)}
+							onFocusDown={() => setFocusedIndex(5)}
 							onFocusRight={() => setFocusedIndex(7)}
 						/>
 					)}
 
-					{video && <VideoStatistics video={video} />}
+					{video && (
+						<VideoStatistics
+							video={video}
+							isFocused={focusedIndex === 5}
+							onFocusLeft={() => showMenu()}
+							onFocusUp={() => setFocusedIndex(4)}
+							onFocusDown={() => setFocusedIndex(6)}
+							onFocusRight={() => setFocusedIndex(7)}
+						/>
+					)}
+
+					{comments && (
+						<Comments
+							comments={comments}
+							isFocused={focusedIndex === 6}
+							onFocusLeft={() => showMenu()}
+							onFocusUp={() => setFocusedIndex(5)}
+							onFocusRight={() => setFocusedIndex(7)}
+						/>
+					)}
 				</div>
 				<div className="video-page__similar">
 					{similarVideos && (
@@ -108,6 +131,7 @@ const VideoPage: FC = () => {
 							videos={similarVideos}
 							onItemSelect={showPreview}
 							isFocused={focusedIndex === 7}
+							onFocusUp={() => setFocusedIndex(3)}
 							onFocusLeft={() => setFocusedIndex(4)}
 						/>
 					)}

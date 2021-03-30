@@ -12,6 +12,7 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	onFocusRight,
 	onFocusUp,
 	onFocusDown,
+	onFocusLeft,
 }) => {
 	const ref = useRef<HTMLDivElement>(null)
 
@@ -37,11 +38,16 @@ const VideoWatch: FC<VideoWatchProps> = ({
 						onFocusRight()
 					}
 					break
+				case 'ArrowLeft':
+					if (onFocusLeft) {
+						onFocusLeft()
+					}
+					break
 				default:
 					break
 			}
 		},
-		[isFocused, onFocusDown, onFocusRight, onFocusUp]
+		[isFocused, onFocusDown, onFocusLeft, onFocusRight, onFocusUp]
 	)
 
 	useEffect(() => {

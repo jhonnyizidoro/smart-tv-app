@@ -1,0 +1,38 @@
+@import '../../assets/styles/variables';
+
+.comment {
+  display: flex;
+  margin: 35px 0;
+
+  &--focused {
+    border: 3px solid red;
+  }
+
+  &__image__wrapper {}
+
+  &__image {
+    border-radius: 50%;
+  }
+
+  &__content {
+    padding: 7px 0 0 10px;
+  }
+
+  &__title {
+    color: $gray;
+    font-size: 1.1rem;
+    font-weight: $fontBold;
+  }
+
+  &__subtitle {
+    color: $lightBlue;
+    font-size: 0.9rem;
+    margin: 5px 0 10px;
+  }
+
+  &__text {
+    color: $gray;
+    line-height: 1.4;
+    word-wrap: anywhere;
+  }
+}

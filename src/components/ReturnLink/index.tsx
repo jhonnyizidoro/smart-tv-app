@@ -10,6 +10,7 @@ const ReturnLink: FC<Navegateble> = ({
 	onFocusDown,
 	onFocusUp,
 	onFocusRight,
+	onFocusLeft,
 }) => {
 	const { goBack } = useHistory()
 
@@ -33,6 +34,11 @@ const ReturnLink: FC<Navegateble> = ({
 				case 'ArrowRight':
 					if (onFocusRight) {
 						onFocusRight()
+					}
+					break
+				case 'ArrowLeft':
+					if (onFocusLeft) {
+						onFocusLeft()
 					}
 					break
 				case 'Enter':
