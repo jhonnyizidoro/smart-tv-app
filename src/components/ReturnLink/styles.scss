@@ -2,7 +2,6 @@
 
 .return-link {
   align-items: center;
-  color: $lightGray;
   display: flex;
   cursor: pointer;
   margin-bottom: 20px;
@@ -10,12 +9,10 @@
   transition: 800ms;
 
   &--focused {
-    color: $dark;
     padding-left: 35px;
   }
 
   &__icon {
-    fill: $lighterGray;
     left: 0;
     margin-right: 10px;
     opacity: 0;
@@ -25,7 +22,34 @@
   }
 
   &__icon--focused {
-    fill: $dark;
     opacity: 1;
+  }
+
+  &--light {
+    color: $lightGray;
+
+    &.return-link--focused {
+      color: $dark;
+    }
+
+    .return-link {
+      &__icon--focused {
+        fill: $dark;
+      }
+    }
+  }
+
+  &--dark {
+    color: $lighterBlue;
+
+    &.return-link--focused {
+      color: $white;
+    }
+
+    .return-link {
+      &__icon--focused {
+        fill: $white;
+      }
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useGlobalContext } from '../../contexts/global'
 
 import './styles.scss'
 
@@ -13,6 +14,7 @@ const ReturnLink: FC<Navegateble> = ({
 	onFocusLeft,
 }) => {
 	const { goBack } = useHistory()
+	const { darkMode } = useGlobalContext()
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
@@ -58,7 +60,9 @@ const ReturnLink: FC<Navegateble> = ({
 
 	return (
 		<div
-			className={`return-link ${isFocused && 'return-link--focused'}`}
+			className={`return-link ${isFocused && 'return-link--focused'} return-link--${
+				darkMode ? 'dark' : 'light'
+			}`}
 			onClick={goBack}
 		>
 			<ArrowLeftIcon

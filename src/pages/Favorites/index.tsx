@@ -85,7 +85,6 @@ const FavoritesPage: FC = () => {
 						isFocused={focusedIndex === 4}
 						onFocusLeft={() => showMenu()}
 						onFocusUp={() => setFocusedIndex(3)}
-						onFocusDown={() => setFocusedIndex(5)}
 					/>
 				)}
 			</div>

@@ -20,7 +20,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 	onFocusRight,
 	onFocusLeft,
 }) => {
-	const { favorites, toggleFromFavorites } = useGlobalContext()
+	const { favorites, toggleFromFavorites, darkMode } = useGlobalContext()
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
@@ -73,7 +73,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 	}, [handleKeyDown])
 
 	return (
-		<div className="video-statistics">
+		<div className={`video-statistics video-statistics--${darkMode ? 'dark' : 'light'}`}>
 			<div className="video-statistics__title">{video.snippet.title}</div>
 			<div className="video-statistics__items">
 				<div className="video-statistics__item">

@@ -12,7 +12,6 @@
 .preview {
   align-items: center;
   animation: showPreview 1s forwards;
-  background: $blue;
   border-radius: 25px 25px 0 0;
   bottom: 0;
   display: flex;
@@ -57,7 +56,6 @@
   }
 
   &__video__overlay {
-    background: linear-gradient(to right, $blue, transparentize($blue, 0.5));
     z-index: 1;
   }
 
@@ -65,5 +63,25 @@
     height: 100%;
     transform: scale(1.8);
     width: 100%;
+  }
+
+  &--blue {
+    background: $blue;
+
+    .preview {
+      &__video__overlay {
+        background: linear-gradient(to right, $blue, transparentize($blue, 0.5));
+      }
+    }
+  }
+
+  &--dark {
+    background: $darkerBlue;
+
+    .preview {
+      &__video__overlay {
+        background: linear-gradient(to right, $darkerBlue, transparentize($darkerBlue, 0.5));
+      }
+    }
   }
 }

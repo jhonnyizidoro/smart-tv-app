@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef } from 'react'
+import { useGlobalContext } from '../../contexts/global'
 
 import './styles.scss'
 
@@ -9,6 +10,7 @@ interface ListItemProps {
 
 const ListItem: FC<ListItemProps> = ({ video, isFocused }) => {
 	const ref = useRef<HTMLLIElement>(null)
+	const { darkMode } = useGlobalContext()
 
 	useEffect(() => {
 		if (isFocused && ref.current) {
@@ -26,7 +28,7 @@ const ListItem: FC<ListItemProps> = ({ video, isFocused }) => {
 	}, [isFocused])
 
 	return (
-		<li className="list-item" ref={ref}>
+		<li className={`list-item list-item--${darkMode ? 'dark' : 'light'}`} ref={ref}>
 			<div className={`list-item__content ${isFocused && 'list-item__content--focused'}`}>
 				<img
 					className="list-item__image"

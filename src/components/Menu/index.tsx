@@ -11,7 +11,7 @@ import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
 
 const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)
-	const { toggleDarkMode } = useGlobalContext()
+	const { toggleDarkMode, darkMode } = useGlobalContext()
 	const { push } = useHistory()
 
 	const handleKeyDown = useCallback(
@@ -65,8 +65,16 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 
 	return (
 		<>
-			{isFocused && <div className="menu__background" />}
-			<div className={`menu ${!isFocused && 'menu--hidden'}`}>
+			{isFocused && (
+				<div
+					className={`menu__background menu__background--${darkMode ? 'dark' : 'light'}`}
+				/>
+			)}
+			<div
+				className={`menu ${!isFocused && 'menu--hidden'} menu--${
+					darkMode ? 'dark' : 'light'
+				}`}
+			>
 				<div className="menu__links">
 					<div className={`menu__item ${focusedIndex === 1 && 'menu__item--focused'}`}>
 						<HomeIcon height={25} width={25} className="menu__icon" />

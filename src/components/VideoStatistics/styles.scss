@@ -1,11 +1,9 @@
 @import '../../assets/styles/variables';
 
 .video-statistics {
-  border-bottom: 1px solid $lighterGray;
   padding: 20px 0;
 
   &__title {
-    color: $dark;
     font-size: 1.4rem;
     line-height: 1.3;
   }
@@ -22,7 +20,6 @@
 
   &__item {
     border: 3px solid transparent;
-    color: $gray;
     margin-right: 25px;
     padding: 10px;
     transition: 250ms;
@@ -33,12 +30,54 @@
   }
 
   &__item--focused {
-    border: 3px solid $gray;
     border-radius: 4px;
   }
 
   &__icon {
-    fill: $gray;
     margin-right: 7px;
+  }
+
+  &--light {
+    border-bottom: 1px solid $lighterGray;
+
+    .video-statistics {
+      &__title {
+        color: $dark;
+      }
+
+      &__item {
+        color: $gray;
+      }
+
+      &__item--focused {
+        border: 3px solid $gray;
+      }
+
+      &__icon {
+        fill: $gray;
+      }
+    }
+  }
+
+  &--dark {
+    border-bottom: 1px solid $blue;
+
+    .video-statistics {
+      &__title {
+        color: $white;
+      }
+
+      &__item {
+        color: $lighterBlue;
+      }
+
+      &__item--focused {
+        border: 3px solid $lighterBlue;
+      }
+
+      &__icon {
+        fill: $lighterBlue;
+      }
+    }
   }
 }

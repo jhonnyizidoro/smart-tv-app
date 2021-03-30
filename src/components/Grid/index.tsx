@@ -55,7 +55,7 @@ const Grid: FC<GridProps> = ({
 						if (onFocusRight) {
 							onFocusRight()
 						}
-					} else {
+					} else if (focusedIndex < videos.length) {
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break

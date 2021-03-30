@@ -1,14 +1,13 @@
 @import '../../assets/styles/variables';
 
 .comment {
+  border-radius: 25px;
   display: flex;
   margin: 15px 0;
   padding: 20px 40px 20px 0;
   transition: 1s;
 
   &--focused {
-    background: $white;
-    border-radius: 25px;
     box-shadow: 12px 18px 20px rgba(0, 0, 0, 0.06);
     padding: 20px;
   }
@@ -24,7 +23,6 @@
   }
 
   &__title {
-    color: $gray;
     font-size: 1.1rem;
     font-weight: $fontBold;
   }
@@ -36,8 +34,39 @@
   }
 
   &__text {
-    color: $gray;
     line-height: 1.4;
     word-wrap: anywhere;
+  }
+
+  &--light {
+    &.comment--focused {
+      background: $white;
+    }
+
+    .comment {
+      &__title {
+        color: $gray;
+      }
+
+      &__text {
+        color: $gray;
+      }
+    }
+  }
+
+  &--dark {
+    &.comment--focused {
+      background: $darkerBlue;
+    }
+
+    .comment {
+      &__title {
+        color: $white;
+      }
+
+      &__text {
+        color: $lighterBlue;
+      }
+    }
   }
 }

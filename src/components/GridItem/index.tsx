@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef } from 'react'
+import { useGlobalContext } from '../../contexts/global'
 
 import './styles.scss'
 
@@ -9,6 +10,7 @@ interface GridItemProps extends Navegateble {
 
 const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
 	const ref = useRef<HTMLDivElement>(null)
+	const { darkMode } = useGlobalContext()
 
 	useEffect(() => {
 		if (isFocused && ref.current) {
@@ -26,7 +28,10 @@ const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
 	}, [isFocused])
 
 	return (
-		<div className={`grid-item grid-item--${size}`} ref={ref}>
+		<div
+			className={`grid-item grid-item--${size} grid-item--${darkMode ? 'dark' : 'light'}`}
+			ref={ref}
+		>
 			<div className={`grid-item__content ${isFocused && 'grid-item__content--focused'}`}>
 				<figure className="grid-item__image__wrapper">
 					<img

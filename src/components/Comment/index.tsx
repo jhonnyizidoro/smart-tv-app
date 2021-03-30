@@ -1,4 +1,5 @@
 import { FC, useEffect, useRef } from 'react'
+import { useGlobalContext } from '../../contexts/global'
 
 import './styles.scss'
 
@@ -8,6 +9,7 @@ interface CommentProps extends Navegateble {
 
 const Comment: FC<CommentProps> = ({ comment, isFocused }) => {
 	const ref = useRef<HTMLLIElement>(null)
+	const { darkMode } = useGlobalContext()
 
 	useEffect(() => {
 		if (isFocused && ref.current) {
@@ -25,7 +27,12 @@ const Comment: FC<CommentProps> = ({ comment, isFocused }) => {
 	}, [isFocused])
 
 	return (
-		<li className={`comment ${isFocused && 'comment--focused'}`} ref={ref}>
+		<li
+			className={`comment ${isFocused && 'comment--focused'} comment--${
+				darkMode ? 'dark' : 'light'
+			}`}
+			ref={ref}
+		>
 			<div className="comment__image__wrapper">
 				<img
 					className="comment__image"

@@ -3,16 +3,7 @@
 .grid-item {
   padding: 15px;
 
-  &--third {
-    width: percentage(1 / 3);
-  }
-
-  &--quarter {
-    width: percentage(1 / 4);
-  }
-
   &__content {
-    background: $white;
     border-radius: 7px;
     box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.06);
     height: 100%;
@@ -44,7 +35,6 @@
   }
 
   &__title {
-    color: $dark;
     font-size: 1.1rem;
     line-height: 1.3;
     margin-bottom: 10px;
@@ -52,7 +42,43 @@
     overflow: hidden;
   }
 
-  &__subtitle {
-    color: $lightGray;
+  &--third {
+    width: percentage(1 / 3);
+  }
+
+  &--quarter {
+    width: percentage(1 / 4);
+  }
+
+  &--light {
+    .grid-item {
+      &__content {
+        background: $white;
+      }
+
+      &__title {
+        color: $dark;
+      }
+
+      &__subtitle {
+        color: $lightGray;
+      }
+    }
+  }
+
+  &--dark {
+    .grid-item {
+      &__content {
+        background: $darkerBlue;
+      }
+
+      &__title {
+        color: $white;
+      }
+
+      &__subtitle {
+        color: $lighterBlue;
+      }
+    }
   }
 }

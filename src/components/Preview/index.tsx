@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useGlobalContext } from '../../contexts/global'
 
 import Button from '../Button'
 
@@ -10,6 +11,7 @@ interface PreviewProps extends Navegateble {
 }
 const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 	const { push } = useHistory()
+	const { darkMode } = useGlobalContext()
 
 	const redirectToVideoPage = useCallback(() => {
 		push(`/watch/${video.id}`)
@@ -43,7 +45,7 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 	}, [handleKeyDown])
 
 	return (
-		<div className="preview">
+		<div className={`preview preview--${darkMode ? 'dark' : 'blue'}`}>
 			<img
 				className="preview__image"
 				src={video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url}
@@ -53,7 +55,7 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 				<div className="preview__title">{video.snippet.title}</div>
 				<div className="preview__text">{video.snippet.description.slice(0, 250)}...</div>
 				<div className="preview__buttons">
-					<Button isBlue={false} isFocused onClick={redirectToVideoPage}>
+					<Button isBlue={darkMode} isFocused onClick={redirectToVideoPage}>
 						Assistir
 					</Button>
 				</div>

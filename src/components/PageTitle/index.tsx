@@ -1,7 +1,16 @@
 import { FC } from 'react'
+import { useGlobalContext } from '../../contexts/global'
 
 import './styles.scss'
 
-const PageTitle: FC = ({ children }) => <h1 className="page-title">{children}</h1>
+const PageTitle: FC = ({ children }) => {
+	const { darkMode } = useGlobalContext()
+
+	return (
+		<h1 className={`page-title page-title--${darkMode ? 'dark' : 'light'}`}>
+			{children}
+		</h1>
+	)
+}
 
 export default PageTitle
