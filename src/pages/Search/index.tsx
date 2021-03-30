@@ -64,7 +64,7 @@ const SearchPage: FC = () => {
 
 			<SearchForm
 				isFocused={focusedIndex === 2}
-				onFocusLeft={() => showMenu()}
+				onClick={() => setFocusedIndex(2)}
 				onFocusDown={() => setFocusedIndex(3)}
 			/>
 
@@ -88,7 +88,6 @@ const SearchPage: FC = () => {
 						isFocused={focusedIndex === 4}
 						onFocusLeft={() => showMenu()}
 						onFocusUp={() => setFocusedIndex(3)}
-						onFocusDown={() => setFocusedIndex(5)}
 					/>
 				)}
 			</div>

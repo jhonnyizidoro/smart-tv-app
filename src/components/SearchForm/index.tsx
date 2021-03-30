@@ -1,46 +1,27 @@
 import { FC, FormEvent, useCallback, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
-import Keyboard from 'react-simple-keyboard'
 
-import 'react-simple-keyboard/build/css/index.css'
+import Keyboard from '../Keyboard'
+
 import './styles.scss'
 
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
+import { ReactComponent as ArrowLeftIcon } from '../../assets/icons/arrow-left.svg'
 
-const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) => {
+interface SearchFormProps extends Navegateble {
+	onClick: () => void
+}
+
+const SearchForm: FC<SearchFormProps> = ({ isFocused, onFocusDown, onClick }) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const formRef = useRef<HTMLFormElement>(null)
 	const { push } = useHistory()
 
-	const handleKeyDown = useCallback(
-		(event: KeyboardEvent) => {
-			if (!isFocused) {
-				return
-			}
-
-			switch (event.keyCode) {
-				case 40:
-					if (onFocusDown) {
-						onFocusDown()
-					}
-					break
-				case 37:
-					if (onFocusLeft && !inputRef.current?.value) {
-						onFocusLeft()
-					}
-					break
-				default:
-					break
-			}
-		},
-		[isFocused, onFocusDown, onFocusLeft]
-	)
-
-	const handleKeyboardInput = useCallback((input: string) => {
-		if (inputRef.current) {
-			inputRef.current.value = input
+	const handleFocusOut = useCallback(() => {
+		if (onFocusDown) {
+			onFocusDown()
 		}
-	}, [])
+	}, [onFocusDown])
 
 	const handleSubmit = useCallback(
 		(event: FormEvent | null = null) => {
@@ -55,22 +36,48 @@ const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) =>
 	)
 
 	const handleKeyboardKeyPress = useCallback(
-		(key: string) => {
-			if (key === '{enter}' && formRef.current) {
-				handleSubmit()
+		(input: string) => {
+			const currentInputValue = inputRef.current?.value || ''
+
+			switch (input) {
+				case 'backspace':
+					if (inputRef.current) {
+						inputRef.current.value = currentInputValue.slice(0, -1)
+					}
+					break
+				case 'enter':
+					if (inputRef.current) {
+						handleSubmit()
+					}
+					break
+				default:
+					if (inputRef.current) {
+						inputRef.current.value = currentInputValue + input
+					}
+					break
 			}
 		},
 		[handleSubmit]
 	)
 
 	useEffect(() => {
-		document.addEventListener('keydown', handleKeyDown)
-		return () => document.removeEventListener('keydown', handleKeyDown)
-	}, [handleKeyDown])
+		if (isFocused) {
+			window.scrollBy({
+				left: 0,
+				top: -window.innerHeight,
+				behavior: 'smooth',
+			})
+		}
+	}, [isFocused])
 
 	return (
 		<>
-			<form className="search-form" ref={formRef} onSubmit={handleSubmit}>
+			<form
+				className="search-form"
+				ref={formRef}
+				onSubmit={handleSubmit}
+				onClick={onClick}
+			>
 				<input
 					type="text"
 					name="query"
@@ -84,12 +91,22 @@ const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) =>
 				<div className="search-form__icon__wrapper">
 					<SearchIcon width={25} height={25} className="search-form__icon" />
 				</div>
+
+				{isFocused && (
+					<div
+						className="search-form__close__icon__wrapper"
+						onClick={event => {
+							event.stopPropagation()
+							handleFocusOut()
+						}}
+					>
+						<ArrowLeftIcon width={25} height={25} className="search-form__close__icon" />
+					</div>
+				)}
 			</form>
 
 			{isFocused && (
-				<div className="search-form__keyboard">
-					<Keyboard onChange={handleKeyboardInput} onKeyPress={handleKeyboardKeyPress} />
-				</div>
+				<Keyboard onClose={handleFocusOut} onKeyPress={handleKeyboardKeyPress} />
 			)}
 		</>
 	)

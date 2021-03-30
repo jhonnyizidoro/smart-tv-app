@@ -14,6 +14,7 @@
 .search-form {
   border-radius: 99px;
   box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
   left: 30px;
   overflow: hidden;
   position: absolute;
@@ -46,14 +47,15 @@
     fill: $lightBlue;
   }
 
-  &__keyboard {
-    animation: showSearchFormKeyboard 1s forwards;
-    background: #ECECEC;
-    bottom: 0;
-    box-shadow: -5px -5px 15px rgba(0, 0, 0, 0.25);
-    padding: 25px;
-    position: fixed;
-    width: 100%;
-    z-index: 4;
+  &__close__icon__wrapper {
+    cursor: pointer;
+    right: 16px;
+    position: absolute;
+    top: 15px;
+    z-index: 1;
+  }
+
+  &__close__icon {
+    fill: $lightBlue;
   }
 }

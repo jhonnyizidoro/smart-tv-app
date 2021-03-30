@@ -83,7 +83,7 @@ const HomePage: FC = () => {
 
 			<SearchForm
 				isFocused={focusedIndex === 2}
-				onFocusLeft={() => showMenu()}
+				onClick={() => setFocusedIndex(2)}
 				onFocusDown={() => setFocusedIndex(3)}
 			/>
 
