@@ -103,6 +103,7 @@ const Grid: FC<GridProps> = ({
 						key={video.id}
 						size={columns === 4 ? 'quarter' : 'third'}
 						isFocused={focusedIndex === index + 1 && isFocused}
+						onClick={clickedVideo => onItemSelect(clickedVideo)}
 					/>
 				))}
 			</div>

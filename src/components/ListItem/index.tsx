@@ -6,9 +6,10 @@ import './styles.scss'
 interface ListItemProps {
 	video: VideosItem
 	isFocused: boolean
+	onClick: (video: VideosItem) => void
 }
 
-const ListItem: FC<ListItemProps> = ({ video, isFocused }) => {
+const ListItem: FC<ListItemProps> = ({ video, isFocused, onClick }) => {
 	const ref = useRef<HTMLLIElement>(null)
 	const { darkMode } = useGlobalContext()
 
@@ -28,7 +29,11 @@ const ListItem: FC<ListItemProps> = ({ video, isFocused }) => {
 	}, [isFocused])
 
 	return (
-		<li className={`list-item list-item--${darkMode ? 'dark' : 'light'}`} ref={ref}>
+		<li
+			ref={ref}
+			onClick={() => onClick(video)}
+			className={`list-item list-item--${darkMode ? 'dark' : 'light'}`}
+		>
 			<div className={`list-item__content ${isFocused && 'list-item__content--focused'}`}>
 				<img
 					className="list-item__image"

@@ -6,9 +6,10 @@ import './styles.scss'
 interface GridItemProps extends Navegateble {
 	video: VideosItem
 	size: 'quarter' | 'third'
+	onClick: (video: VideosItem) => void
 }
 
-const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
+const GridItem: FC<GridItemProps> = ({ video, size, isFocused, onClick }) => {
 	const ref = useRef<HTMLDivElement>(null)
 	const { darkMode } = useGlobalContext()
 
@@ -29,8 +30,9 @@ const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
 
 	return (
 		<div
-			className={`grid-item grid-item--${size} grid-item--${darkMode ? 'dark' : 'light'}`}
 			ref={ref}
+			onClick={() => onClick(video)}
+			className={`grid-item grid-item--${size} grid-item--${darkMode ? 'dark' : 'light'}`}
 		>
 			<div className={`grid-item__content ${isFocused && 'grid-item__content--focused'}`}>
 				<figure className="grid-item__image__wrapper">

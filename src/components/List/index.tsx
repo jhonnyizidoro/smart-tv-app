@@ -89,6 +89,7 @@ const List: FC<ListProps> = ({
 						video={video}
 						key={video.id}
 						isFocused={focusedIndex === index + 1 && isFocused}
+						onClick={clickedVideo => onItemSelect(clickedVideo)}
 					/>
 				))}
 			</ul>

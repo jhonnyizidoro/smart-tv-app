@@ -7,11 +7,13 @@
     align-items: center;
     border-radius: 7px;
     box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
     display: flex;
     padding: 20px;
     transition: 450ms;
   }
 
+  &:hover .list-item__content,
   &__content--focused {
     box-shadow: 14px 17px 23px rgba(0, 0, 0, 0.12), 0 0 0 3px $blue;
     transform: scale(1.05) translateY(-10px);
