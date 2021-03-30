@@ -1,7 +1,10 @@
 import { FC, useCallback, useEffect } from 'react'
+import { useGlobalContext } from '../../contexts/global'
 
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg'
 import { ReactComponent as LikeIcon } from '../../assets/icons/like.svg'
+import { ReactComponent as StarOutlinedIcon } from '../../assets/icons/star-outlined.svg'
+import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
 
 import './styles.scss'
 
@@ -17,6 +20,8 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 	onFocusRight,
 	onFocusLeft,
 }) => {
+	const { favorites, toggleFromFavorites } = useGlobalContext()
+
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			if (!isFocused) {
@@ -44,11 +49,23 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 						onFocusLeft()
 					}
 					break
+				case 'Enter':
+				case 'NumpadEnter':
+					toggleFromFavorites(video.id)
+					break
 				default:
 					break
 			}
 		},
-		[isFocused, onFocusDown, onFocusLeft, onFocusRight, onFocusUp]
+		[
+			isFocused,
+			onFocusDown,
+			onFocusLeft,
+			onFocusRight,
+			onFocusUp,
+			toggleFromFavorites,
+			video,
+		]
 	)
 
 	useEffect(() => {
@@ -57,7 +74,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 	}, [handleKeyDown])
 
 	return (
-		<div className={`video-statistics ${isFocused && 'video-statistics--focused'}`}>
+		<div className="video-statistics">
 			<div className="video-statistics__title">{video.snippet.title}</div>
 			<div className="video-statistics__items">
 				<div className="video-statistics__item">
@@ -67,6 +84,27 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 				<div className="video-statistics__item">
 					<LikeIcon width={20} height={20} className="video-statistics__icon" />
 					{video.statistics.likeCount}
+				</div>
+				<div
+					className={`video-statistics__item ${
+						isFocused && 'video-statistics__item--focused'
+					}`}
+				>
+					{favorites.includes(video.id) ? (
+						<>
+							<StarIcon width={20} height={20} className="video-statistics__icon" />
+							Remover dos favoritos
+						</>
+					) : (
+						<>
+							<StarOutlinedIcon
+								width={20}
+								height={20}
+								className="video-statistics__icon"
+							/>
+							Adicionar aos favoritos
+						</>
+					)}
 				</div>
 			</div>
 		</div>

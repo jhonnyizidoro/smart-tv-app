@@ -4,10 +4,6 @@
   border-bottom: 1px solid $lighterGray;
   padding: 20px 0;
 
-  &--focused {
-    border: 3px solid red;
-  }
-
   &__title {
     color: $dark;
     font-size: 1.4rem;
@@ -25,8 +21,20 @@
   }
 
   &__item {
+    border: 3px solid transparent;
     color: $gray;
     margin-right: 25px;
+    padding: 10px;
+    transition: 250ms;
+  }
+
+  &__item:first-child {
+    padding-left: 0;
+  }
+
+  &__item--focused {
+    border: 3px solid $gray;
+    border-radius: 4px;
   }
 
   &__icon {
