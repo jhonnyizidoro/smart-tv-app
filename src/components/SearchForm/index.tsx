@@ -25,7 +25,7 @@ const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) =>
 					break
 			}
 		},
-		[isFocused, onFocusDown]
+		[isFocused, onFocusDown, onFocusLeft]
 	)
 
 	useEffect(() => {

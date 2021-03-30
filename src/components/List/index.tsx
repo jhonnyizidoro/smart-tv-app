@@ -6,6 +6,7 @@ import ListItem from '../ListItem'
 interface ListProps extends Navegateble {
 	title: string
 	videos: VideosItem[]
+	onItemSelect: (video: VideosItem) => void
 }
 
 const List: FC<ListProps> = ({
@@ -16,6 +17,7 @@ const List: FC<ListProps> = ({
 	onFocusLeft,
 	onFocusDown,
 	onFocusUp,
+	onItemSelect,
 }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)
 
@@ -54,11 +56,24 @@ const List: FC<ListProps> = ({
 						onFocusLeft()
 					}
 					break
+				case 'Enter':
+				case 'NumpadEnter':
+					onItemSelect(videos[focusedIndex - 1])
+					break
 				default:
 					break
 			}
 		},
-		[focusedIndex, isFocused, onFocusDown, onFocusLeft, onFocusRight, onFocusUp, videos]
+		[
+			focusedIndex,
+			isFocused,
+			onFocusDown,
+			onFocusLeft,
+			onFocusRight,
+			onFocusUp,
+			onItemSelect,
+			videos,
+		]
 	)
 
 	useEffect(() => {

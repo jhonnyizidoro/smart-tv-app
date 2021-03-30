@@ -9,6 +9,7 @@ interface GridProps extends Navegateble {
 	title: string
 	videos: VideosItem[]
 	columns: 3 | 4
+	onItemSelect: (video: VideosItem) => void
 }
 
 const Grid: FC<GridProps> = ({
@@ -20,6 +21,7 @@ const Grid: FC<GridProps> = ({
 	onFocusLeft,
 	onFocusDown,
 	onFocusUp,
+	onItemSelect,
 }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)
 
@@ -66,6 +68,10 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
+				case 'Enter':
+				case 'NumpadEnter':
+					onItemSelect(videos[focusedIndex - 1])
+					break
 				default:
 					break
 			}
@@ -78,6 +84,7 @@ const Grid: FC<GridProps> = ({
 			onFocusLeft,
 			onFocusRight,
 			onFocusUp,
+			onItemSelect,
 			videos,
 		]
 	)

@@ -6,6 +6,7 @@ import Grid from '../../components/Grid'
 import List from '../../components/List'
 import SearchForm from '../../components/SearchForm'
 import Menu from '../../components/Menu'
+import Preview from '../../components/Preview'
 
 import './styles.scss'
 
@@ -13,6 +14,9 @@ const HomePage: FC = () => {
 	const { getVideosByCategory, getMostPopularVideos, getVideosById } = useYoutubeApi()
 
 	const [focusedIndex, setFocusedIndex] = useState<number>(3)
+	const [previewVideo, setPreviewVideo] = useState<VideosItem | null>()
+	const [focusedIndexBeforePreview, setFocusedIndexBeforePreview] = useState<number>(3)
+	const [focusedIndexBeforeMenu, setFocusedIndexBeforeMenu] = useState<number>(3)
 	const [bannerVideo, setBannerVideo] = useState<VideosItem>()
 	const [mostPopularVideos, setMostPopularVideos] = useState<VideosItem[]>()
 	const [movieVideos, setMovieVideos] = useState<VideosItem[]>()
@@ -45,18 +49,41 @@ const HomePage: FC = () => {
 		setAnimalVideos(animalVideosResponse.items)
 	}, [getMostPopularVideos, getVideosById, getVideosByCategory])
 
+	const showMenu = useCallback(() => {
+		setFocusedIndexBeforeMenu(focusedIndex)
+		setFocusedIndex(1)
+	}, [focusedIndex])
+
+	const hideMenu = useCallback(() => {
+		setFocusedIndex(focusedIndexBeforeMenu)
+	}, [focusedIndexBeforeMenu])
+
+	const showPreview = useCallback(
+		(video: VideosItem) => {
+			setFocusedIndexBeforePreview(focusedIndex)
+			setFocusedIndex(9)
+			setPreviewVideo(video)
+		},
+		[focusedIndex]
+	)
+
+	const hidePreview = useCallback(() => {
+		setPreviewVideo(null)
+		setFocusedIndex(focusedIndexBeforePreview)
+	}, [focusedIndexBeforePreview])
+
 	useEffect(() => {
 		loadInitialData()
 	}, [loadInitialData])
 
 	return (
 		<>
-			<Menu isFocused={focusedIndex === 1} onFocusRight={() => setFocusedIndex(3)} />
+			<Menu isFocused={focusedIndex === 1} onFocusRight={() => hideMenu()} />
 
 			<SearchForm
 				isFocused={focusedIndex === 2}
+				onFocusLeft={() => showMenu()}
 				onFocusDown={() => setFocusedIndex(3)}
-				onFocusLeft={() => setFocusedIndex(1)}
 			/>
 
 			{bannerVideo && (
@@ -65,7 +92,7 @@ const HomePage: FC = () => {
 					isFocused={focusedIndex === 3}
 					onFocusUp={() => setFocusedIndex(2)}
 					onFocusDown={() => setFocusedIndex(4)}
-					onFocusLeft={() => setFocusedIndex(1)}
+					onFocusLeft={() => showMenu()}
 				/>
 			)}
 
@@ -75,11 +102,12 @@ const HomePage: FC = () => {
 						<Grid
 							columns={3}
 							title="Em alta"
-							isFocused={focusedIndex === 4}
 							videos={mostPopularVideos}
+							onItemSelect={showPreview}
+							isFocused={focusedIndex === 4}
 							onFocusUp={() => setFocusedIndex(3)}
 							onFocusDown={() => setFocusedIndex(6)}
-							onFocusLeft={() => setFocusedIndex(1)}
+							onFocusLeft={() => showMenu()}
 							onFocusRight={() => setFocusedIndex(5)}
 						/>
 					)}
@@ -90,6 +118,7 @@ const HomePage: FC = () => {
 						<List
 							videos={movieVideos}
 							title="Filmes e animações"
+							onItemSelect={showPreview}
 							isFocused={focusedIndex === 5}
 							onFocusUp={() => setFocusedIndex(3)}
 							onFocusLeft={() => setFocusedIndex(4)}
@@ -105,9 +134,10 @@ const HomePage: FC = () => {
 						<List
 							title="Veículos"
 							videos={vehicleVideos}
+							onItemSelect={showPreview}
 							isFocused={focusedIndex === 6}
 							onFocusUp={() => setFocusedIndex(4)}
-							onFocusLeft={() => setFocusedIndex(1)}
+							onFocusLeft={() => showMenu()}
 							onFocusRight={() => setFocusedIndex(7)}
 						/>
 					)}
@@ -118,6 +148,7 @@ const HomePage: FC = () => {
 						<List
 							title="Músicas"
 							videos={musicVideos}
+							onItemSelect={showPreview}
 							isFocused={focusedIndex === 7}
 							onFocusUp={() => setFocusedIndex(4)}
 							onFocusLeft={() => setFocusedIndex(6)}
@@ -129,15 +160,24 @@ const HomePage: FC = () => {
 				<div className="home-page__list">
 					{animalVideos && (
 						<List
-							isFocused={focusedIndex === 8}
 							title="Animais"
 							videos={animalVideos}
+							onItemSelect={showPreview}
+							isFocused={focusedIndex === 8}
 							onFocusUp={() => setFocusedIndex(5)}
 							onFocusLeft={() => setFocusedIndex(7)}
 						/>
 					)}
 				</div>
 			</div>
+
+			{previewVideo && (
+				<Preview
+					video={previewVideo}
+					isFocused={focusedIndex === 9}
+					onFocusUp={() => hidePreview()}
+				/>
+			)}
 		</>
 	)
 }
