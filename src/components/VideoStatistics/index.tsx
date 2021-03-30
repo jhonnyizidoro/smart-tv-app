@@ -28,29 +28,28 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowDown':
+			switch (event.keyCode) {
+				case 40:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 'ArrowUp':
+				case 38:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 'ArrowRight':
+				case 39:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 'ArrowLeft':
+				case 37:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 'Enter':
-				case 'NumpadEnter':
+				case 13:
 					toggleFromFavorites(video.id)
 					break
 				default:

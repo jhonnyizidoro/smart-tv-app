@@ -20,24 +20,23 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowRight':
+			switch (event.keyCode) {
+				case 39:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 'ArrowDown':
+				case 40:
 					if (focusedIndex !== 4) {
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 'ArrowUp':
+				case 38:
 					if (focusedIndex !== 1) {
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 'Enter':
-				case 'NumpadEnter':
+				case 13:
 					switch (focusedIndex) {
 						case 1:
 							push('/')

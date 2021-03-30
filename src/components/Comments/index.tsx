@@ -23,8 +23,8 @@ const Comments: FC<CommentsProps> = ({
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowUp':
+			switch (event.keyCode) {
+				case 38:
 					if (focusedIndex === 1) {
 						if (onFocusUp) {
 							onFocusUp()
@@ -33,17 +33,17 @@ const Comments: FC<CommentsProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 'ArrowDown':
+				case 40:
 					if (focusedIndex !== comments.length) {
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 'ArrowRight':
+				case 39:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 'ArrowLeft':
+				case 37:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}

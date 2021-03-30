@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useCallback, useEffect } from 'react'
 import { useGlobalContext } from './contexts/global'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
@@ -13,6 +13,17 @@ import './App.scss'
 
 const App: FC = () => {
 	const { darkMode } = useGlobalContext()
+
+	const preventKeyScrolling = useCallback((event: KeyboardEvent) => {
+		if ([32, 37, 38, 39, 40].includes(event.keyCode)) {
+			event.preventDefault()
+		}
+	}, [])
+
+	useEffect(() => {
+		window.addEventListener('keydown', preventKeyScrolling)
+		return () => window.removeEventListener('keydown', preventKeyScrolling)
+	}, [preventKeyScrolling])
 
 	return (
 		<div className={darkMode ? 'content--dark' : 'content--light'}>

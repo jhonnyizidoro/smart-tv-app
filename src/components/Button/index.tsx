@@ -14,9 +14,8 @@ const Button: FC<ButtonProps> = ({ isBlue, isFocused, onEnterPress, ...otherProp
 				return
 			}
 
-			switch (event.code) {
-				case 'Enter':
-				case 'NumpadEnter':
+			switch (event.keyCode) {
+				case 13:
 					if (onEnterPress) {
 						onEnterPress()
 					}

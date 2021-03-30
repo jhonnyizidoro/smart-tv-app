@@ -31,8 +31,8 @@ const Grid: FC<GridProps> = ({
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowDown':
+			switch (event.keyCode) {
+				case 40:
 					if (focusedIndex > videos.length - columns) {
 						if (onFocusDown) {
 							onFocusDown()
@@ -41,7 +41,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex + columns)
 					}
 					break
-				case 'ArrowUp':
+				case 38:
 					if (focusedIndex <= columns) {
 						if (onFocusUp) {
 							onFocusUp()
@@ -50,7 +50,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex - columns)
 					}
 					break
-				case 'ArrowRight':
+				case 39:
 					if (focusedIndex % columns === 0) {
 						if (onFocusRight) {
 							onFocusRight()
@@ -59,7 +59,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 'ArrowLeft':
+				case 37:
 					if (focusedIndex % columns === 1) {
 						if (onFocusLeft) {
 							onFocusLeft()
@@ -68,8 +68,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 'Enter':
-				case 'NumpadEnter':
+				case 13:
 					onItemSelect(videos[focusedIndex - 1])
 					break
 				default:

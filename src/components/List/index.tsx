@@ -27,8 +27,8 @@ const List: FC<ListProps> = ({
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowDown':
+			switch (event.keyCode) {
+				case 40:
 					if (focusedIndex === videos.length) {
 						if (onFocusDown) {
 							onFocusDown()
@@ -37,7 +37,7 @@ const List: FC<ListProps> = ({
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 'ArrowUp':
+				case 38:
 					if (focusedIndex === 1) {
 						if (onFocusUp) {
 							onFocusUp()
@@ -46,18 +46,17 @@ const List: FC<ListProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 'ArrowRight':
+				case 39:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 'ArrowLeft':
+				case 37:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 'Enter':
-				case 'NumpadEnter':
+				case 13:
 					onItemSelect(videos[focusedIndex - 1])
 					break
 				default:

@@ -31,7 +31,9 @@ const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
 				<figure className="grid-item__image__wrapper">
 					<img
 						className="grid-item__image"
-						src={video.snippet.thumbnails.high.url}
+						src={
+							video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url
+						}
 						alt={`Thumbnail ${video.snippet.title}`}
 					/>
 				</figure>

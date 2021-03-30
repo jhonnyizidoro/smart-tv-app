@@ -21,18 +21,18 @@ const Banner: FC<BannerProps> = ({
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowDown':
+			switch (event.keyCode) {
+				case 40:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 'ArrowUp':
+				case 38:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 'ArrowLeft':
+				case 37:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}

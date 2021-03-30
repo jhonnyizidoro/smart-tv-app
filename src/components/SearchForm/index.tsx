@@ -18,13 +18,13 @@ const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) =>
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowDown':
+			switch (event.keyCode) {
+				case 40:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 'ArrowLeft':
+				case 37:
 					if (onFocusLeft && !inputRef.current?.value) {
 						onFocusLeft()
 					}

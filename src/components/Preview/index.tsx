@@ -21,14 +21,13 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 				return
 			}
 
-			switch (event.code) {
-				case 'ArrowUp':
+			switch (event.keyCode) {
+				case 38:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 'Enter':
-				case 'NumpadEnter':
+				case 13:
 					redirectToVideoPage()
 					break
 				default:
