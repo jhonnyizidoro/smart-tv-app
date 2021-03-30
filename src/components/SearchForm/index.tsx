@@ -1,4 +1,5 @@
 import { FC, FormEvent, useCallback, useEffect, useRef } from 'react'
+import { useHistory } from 'react-router-dom'
 import Keyboard from 'react-simple-keyboard'
 
 import 'react-simple-keyboard/build/css/index.css'
@@ -9,6 +10,7 @@ import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
 const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const formRef = useRef<HTMLFormElement>(null)
+	const { push } = useHistory()
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
@@ -40,14 +42,17 @@ const SearchForm: FC<Navegateble> = ({ isFocused, onFocusDown, onFocusLeft }) =>
 		}
 	}, [])
 
-	const handleSubmit = useCallback((event: FormEvent | null = null) => {
-		if (event) {
-			event.preventDefault()
-		}
-		if (inputRef.current) {
-			console.log(inputRef.current.value)
-		}
-	}, [])
+	const handleSubmit = useCallback(
+		(event: FormEvent | null = null) => {
+			if (event) {
+				event.preventDefault()
+			}
+			if (inputRef.current?.value) {
+				push(`/search/${inputRef.current.value}`)
+			}
+		},
+		[push]
+	)
 
 	const handleKeyboardKeyPress = useCallback(
 		(key: string) => {

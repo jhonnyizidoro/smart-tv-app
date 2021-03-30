@@ -36,7 +36,7 @@ const ListItem: FC<ListItemProps> = ({ video, isFocused }) => {
 				<div className="list-item__text">
 					<h2 className="list-item__title">{video.snippet.title}</h2>
 					<span className="list-item__subtitle">
-						{video.statistics.viewCount} visualizações
+						{video.statistics?.viewCount} visualizações
 					</span>
 				</div>
 			</div>

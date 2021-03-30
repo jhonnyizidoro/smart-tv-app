@@ -38,7 +38,9 @@ const GridItem: FC<GridItemProps> = ({ video, size, isFocused }) => {
 				<div className="grid-item__footer">
 					<h2 className="grid-item__title">{video.snippet.title}</h2>
 					<span className="grid-item__subtitle">
-						{video.statistics.viewCount} visualizações
+						{video.statistics
+							? `${video.statistics.viewCount} visualizações`
+							: video.snippet.publishedAt}
 					</span>
 				</div>
 			</div>

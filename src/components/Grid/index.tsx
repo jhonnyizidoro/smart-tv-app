@@ -6,7 +6,7 @@ import GridItem from '../GridItem'
 import './styles.scss'
 
 interface GridProps extends Navegateble {
-	title: string
+	title?: string
 	videos: VideosItem[]
 	columns: 3 | 4
 	onItemSelect: (video: VideosItem) => void
@@ -96,7 +96,7 @@ const Grid: FC<GridProps> = ({
 
 	return (
 		<div className="grid">
-			<SectionTitle>{title}</SectionTitle>
+			{title && <SectionTitle>{title}</SectionTitle>}
 			<div className="grid__items">
 				{videos.map((video, index) => (
 					<GridItem

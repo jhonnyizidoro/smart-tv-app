@@ -8,7 +8,7 @@ interface VideosItem {
 	id: string
 	etag: string
 	kind: string
-	statistics: {
+	statistics?: {
 		viewCount: string
 		likeCount: string
 		dislikeCount: string

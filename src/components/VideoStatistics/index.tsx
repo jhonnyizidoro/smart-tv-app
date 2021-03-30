@@ -79,11 +79,11 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 			<div className="video-statistics__items">
 				<div className="video-statistics__item">
 					<EyeIcon width={20} height={20} className="video-statistics__icon" />
-					{video.statistics.viewCount}
+					{video.statistics?.viewCount}
 				</div>
 				<div className="video-statistics__item">
 					<LikeIcon width={20} height={20} className="video-statistics__icon" />
-					{video.statistics.likeCount}
+					{video.statistics?.likeCount}
 				</div>
 				<div
 					className={`video-statistics__item ${

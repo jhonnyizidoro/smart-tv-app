@@ -6,6 +6,7 @@ interface UseYoutubeApi {
 	getMostPopularVideos: (maxResults: number) => Promise<VideosResponse>
 	getVideosById: (id: string) => Promise<VideosResponse>
 	getCommentsByVideoId: (videoId: string) => Promise<CommentsResponse>
+	searchVideosByQuery: (query: string) => Promise<VideosResponse>
 }
 
 export const useYoutubeApi = (): UseYoutubeApi => {
@@ -49,11 +50,26 @@ export const useYoutubeApi = (): UseYoutubeApi => {
 		)
 	}
 
+	const searchVideosByQuery = async (query: string): Promise<VideosResponse> => {
+		const videos = await sendRequestToYoutubeApi<VideosResponse>(
+			`search?part=snippet&maxResults=64&type=video&q=${query}`
+		)
+
+		videos.items.forEach(item => {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
+			item.id = item.id.videoId
+		})
+
+		return videos
+	}
+
 	return {
 		getCategories: useCallback(getCategories, []),
 		getVideosByCategory: useCallback(getVideosByCategory, []),
 		getMostPopularVideos: useCallback(getMostPopularVideos, []),
 		getVideosById: useCallback(getVideosById, []),
 		getCommentsByVideoId: useCallback(getCommentsByVideoId, []),
+		searchVideosByQuery: useCallback(searchVideosByQuery, []),
 	}
 }
