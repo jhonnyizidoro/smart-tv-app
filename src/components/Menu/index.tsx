@@ -8,11 +8,26 @@ import './styles.scss'
 
 import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
+import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg'
 
 const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)
 	const { toggleDarkMode, darkMode } = useGlobalContext()
 	const { push } = useHistory()
+
+	const handleClose = useCallback(() => {
+		if (onFocusRight) {
+			onFocusRight()
+		}
+	}, [onFocusRight])
+
+	const redirect = useCallback(
+		(url: string) => {
+			push(url)
+			handleClose()
+		},
+		[handleClose, push]
+	)
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
@@ -22,9 +37,7 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 
 			switch (event.keyCode) {
 				case 39:
-					if (onFocusRight) {
-						onFocusRight()
-					}
+					handleClose()
 					break
 				case 40:
 					if (focusedIndex !== 4) {
@@ -39,10 +52,10 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 				case 13:
 					switch (focusedIndex) {
 						case 1:
-							push('/')
+							redirect('/')
 							break
 						case 2:
-							push('/favorites')
+							redirect('/favorites')
 							break
 						case 3:
 							toggleDarkMode()
@@ -55,7 +68,7 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 					break
 			}
 		},
-		[focusedIndex, isFocused, onFocusRight, push, toggleDarkMode]
+		[focusedIndex, handleClose, isFocused, redirect, toggleDarkMode]
 	)
 
 	useEffect(() => {
@@ -75,19 +88,32 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 					darkMode ? 'dark' : 'light'
 				}`}
 			>
+				<div className="menu__close" onClick={handleClose}>
+					<CloseIcon height={15} width={15} className="menu__close__icon" />
+				</div>
+
 				<div className="menu__links">
-					<div className={`menu__item ${focusedIndex === 1 && 'menu__item--focused'}`}>
+					<div
+						onClick={() => redirect('/')}
+						className={`menu__item ${focusedIndex === 1 && 'menu__item--focused'}`}
+					>
 						<HomeIcon height={25} width={25} className="menu__icon" />
 						Início
 					</div>
 
-					<div className={`menu__item ${focusedIndex === 2 && 'menu__item--focused'}`}>
+					<div
+						onClick={() => redirect('/favorites')}
+						className={`menu__item ${focusedIndex === 2 && 'menu__item--focused'}`}
+					>
 						<StarIcon height={25} width={25} className="menu__icon" />
 						Favoritos
 					</div>
 				</div>
 
-				<div className={`menu__item ${focusedIndex === 3 && 'menu__item--focused'}`}>
+				<div
+					onClick={() => toggleDarkMode()}
+					className={`menu__item ${focusedIndex === 3 && 'menu__item--focused'}`}
+				>
 					Modo escuro
 					<Checkbox />
 				</div>

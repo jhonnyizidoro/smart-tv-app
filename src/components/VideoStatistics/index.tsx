@@ -85,7 +85,8 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 					{video.statistics?.likeCount}
 				</div>
 				<div
-					className={`video-statistics__item ${
+					onClick={() => toggleFromFavorites(video.id)}
+					className={`video-statistics__item video-statistics__item--clickable ${
 						isFocused && 'video-statistics__item--focused'
 					}`}
 				>
