@@ -15,7 +15,10 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 
 	const redirectToVideoPage = useCallback(() => {
 		push(`/watch/${video.id}`)
-	}, [push, video])
+		if (onFocusUp) {
+			onFocusUp()
+		}
+	}, [onFocusUp, push, video])
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {

@@ -10,6 +10,7 @@ import Grid from '../../components/Grid'
 import Preview from '../../components/Preview'
 
 import './styles.scss'
+import Hamburger from '../../components/Hamburger'
 
 interface SearchPageParams {
 	query: string
@@ -62,8 +63,11 @@ const SearchPage: FC = () => {
 		<>
 			<Menu isFocused={focusedIndex === 1} onFocusRight={() => hideMenu()} />
 
+			<Hamburger onClick={() => showMenu()} />
+
 			<SearchForm
 				isFocused={focusedIndex === 2}
+				onFocusLeft={() => showMenu()}
 				onClick={() => setFocusedIndex(2)}
 				onFocusDown={() => setFocusedIndex(3)}
 			/>

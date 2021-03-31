@@ -12,6 +12,7 @@ import VideoStatistics from '../../components/VideoStatistics'
 
 import './styles.scss'
 import Comments from '../../components/Comments'
+import Hamburger from '../../components/Hamburger'
 
 interface VideoPageParams {
 	id: string
@@ -76,8 +77,11 @@ const VideoPage: FC = () => {
 		<>
 			<Menu isFocused={focusedIndex === 1} onFocusRight={() => hideMenu()} />
 
+			<Hamburger onClick={() => showMenu()} />
+
 			<SearchForm
 				isFocused={focusedIndex === 2}
+				onFocusLeft={() => showMenu()}
 				onClick={() => setFocusedIndex(2)}
 				onFocusDown={() => setFocusedIndex(3)}
 			/>

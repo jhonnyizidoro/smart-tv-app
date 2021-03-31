@@ -7,6 +7,7 @@ import List from '../../components/List'
 import SearchForm from '../../components/SearchForm'
 import Menu from '../../components/Menu'
 import Preview from '../../components/Preview'
+import Hamburger from '../../components/Hamburger'
 
 import './styles.scss'
 
@@ -81,8 +82,11 @@ const HomePage: FC = () => {
 		<>
 			<Menu isFocused={focusedIndex === 1} onFocusRight={() => hideMenu()} />
 
+			<Hamburger onClick={() => showMenu()} />
+
 			<SearchForm
 				isFocused={focusedIndex === 2}
+				onFocusLeft={() => showMenu()}
 				onClick={() => setFocusedIndex(2)}
 				onFocusDown={() => setFocusedIndex(3)}
 			/>

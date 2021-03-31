@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import Button from '../Button'
 
@@ -15,6 +16,15 @@ const Banner: FC<BannerProps> = ({
 	onFocusUp,
 	onFocusLeft,
 }) => {
+	const { push } = useHistory()
+
+	const redirectToVideoPage = useCallback(() => {
+		push(`/watch/${video.id}`)
+		if (onFocusUp) {
+			onFocusUp()
+		}
+	}, [onFocusUp, push, video])
+
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			if (!isFocused) {
@@ -37,11 +47,14 @@ const Banner: FC<BannerProps> = ({
 						onFocusLeft()
 					}
 					break
+				case 13:
+					redirectToVideoPage()
+					break
 				default:
 					break
 			}
 		},
-		[isFocused, onFocusDown, onFocusLeft, onFocusUp]
+		[isFocused, onFocusDown, onFocusLeft, onFocusUp, redirectToVideoPage]
 	)
 
 	useEffect(() => {
@@ -77,6 +90,7 @@ const Banner: FC<BannerProps> = ({
 					aria-label={`assistir ${video.snippet.title}`}
 					type="button"
 					isFocused={isFocused}
+					onClick={redirectToVideoPage}
 				>
 					Assistir
 				</Button>

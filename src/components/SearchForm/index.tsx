@@ -12,16 +12,27 @@ interface SearchFormProps extends Navegateble {
 	onClick: () => void
 }
 
-const SearchForm: FC<SearchFormProps> = ({ isFocused, onFocusDown, onClick }) => {
+const SearchForm: FC<SearchFormProps> = ({
+	isFocused,
+	onFocusDown,
+	onClick,
+	onFocusLeft,
+}) => {
 	const inputRef = useRef<HTMLInputElement>(null)
 	const formRef = useRef<HTMLFormElement>(null)
 	const { push } = useHistory()
 
-	const handleFocusOut = useCallback(() => {
+	const handleClose = useCallback(() => {
 		if (onFocusDown) {
 			onFocusDown()
 		}
 	}, [onFocusDown])
+
+	const handleFocusLeft = useCallback(() => {
+		if (onFocusLeft) {
+			onFocusLeft()
+		}
+	}, [onFocusLeft])
 
 	const handleSubmit = useCallback(
 		(event: FormEvent | null = null) => {
@@ -97,7 +108,7 @@ const SearchForm: FC<SearchFormProps> = ({ isFocused, onFocusDown, onClick }) =>
 						className="search-form__close__icon__wrapper"
 						onClick={event => {
 							event.stopPropagation()
-							handleFocusOut()
+							handleClose()
 						}}
 					>
 						<ArrowLeftIcon width={25} height={25} className="search-form__close__icon" />
@@ -106,7 +117,12 @@ const SearchForm: FC<SearchFormProps> = ({ isFocused, onFocusDown, onClick }) =>
 			</form>
 
 			{isFocused && (
-				<Keyboard onClose={handleFocusOut} onKeyPress={handleKeyboardKeyPress} />
+				<Keyboard
+					isFocused
+					onFocusDown={handleClose}
+					onFocusLeft={handleFocusLeft}
+					onKeyPress={handleKeyboardKeyPress}
+				/>
 			)}
 		</>
 	)

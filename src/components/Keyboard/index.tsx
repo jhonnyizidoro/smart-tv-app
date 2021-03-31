@@ -3,12 +3,11 @@ import { useGlobalContext } from '../../contexts/global'
 
 import './styles.scss'
 
-interface KeyboardProps {
+interface KeyboardProps extends Navegateble {
 	onKeyPress: (input: string) => void
-	onClose: () => void
 }
 
-const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onClose }) => {
+const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) => {
 	const [focusedRow, setFocusedRow] = useState<number>(0)
 	const [focusedIndex, setFocusedIndex] = useState<number>(0)
 	const { darkMode } = useGlobalContext()
@@ -29,8 +28,6 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onClose }) => {
 				case 38:
 					if (focusedRow !== 0) {
 						setFocusedRow(focusedRow - 1)
-					} else {
-						onClose()
 					}
 					break
 				case 40:
@@ -39,6 +36,10 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onClose }) => {
 							setFocusedIndex(keymap[focusedRow + 1].length - 1)
 						}
 						setFocusedRow(focusedRow + 1)
+					} else {
+						if (onFocusDown) {
+							onFocusDown()
+						}
 					}
 					break
 				case 39:
@@ -49,6 +50,10 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onClose }) => {
 				case 37:
 					if (focusedIndex !== 0) {
 						setFocusedIndex(focusedIndex - 1)
+					} else {
+						if (onFocusLeft) {
+							onFocusLeft()
+						}
 					}
 					break
 				case 13:
@@ -58,7 +63,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onClose }) => {
 					break
 			}
 		},
-		[focusedIndex, focusedRow, keymap, onClose, onKeyPress]
+		[focusedIndex, focusedRow, keymap, onFocusDown, onFocusLeft, onKeyPress]
 	)
 
 	useEffect(() => {
