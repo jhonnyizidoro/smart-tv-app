@@ -9,10 +9,10 @@ import SearchForm from '../../components/SearchForm'
 import Menu from '../../components/Menu'
 import VideoWatch from '../../components/VideoWatch'
 import VideoStatistics from '../../components/VideoStatistics'
-
-import './styles.scss'
 import Comments from '../../components/Comments'
 import Hamburger from '../../components/Hamburger'
+
+import './styles.scss'
 
 interface VideoPageParams {
 	id: string

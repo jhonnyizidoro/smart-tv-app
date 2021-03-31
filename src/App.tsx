@@ -26,7 +26,7 @@ const App: FC = () => {
 	}, [preventKeyScrolling])
 
 	return (
-		<div className={`content--${darkMode ? 'dark' : 'light'}`}>
+		<div className={`content content--${darkMode ? 'dark' : 'light'}`}>
 			<BrowserRouter>
 				<Switch>
 					<Route exact component={HomePage} path="/" />

@@ -87,10 +87,9 @@ const Banner: FC<BannerProps> = ({
 				<h1 className="banner__title">{video.snippet.title}</h1>
 				<Button
 					isBlue
-					aria-label={`assistir ${video.snippet.title}`}
 					type="button"
-					isFocused={isFocused}
-					onClick={redirectToVideoPage}
+					onClick={() => redirectToVideoPage()}
+					aria-label={`assistir ${video.snippet.title}`}
 				>
 					Assistir
 				</Button>

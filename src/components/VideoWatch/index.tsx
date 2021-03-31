@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useRef } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 
 import './styles.scss'
 
@@ -14,7 +14,24 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	onFocusDown,
 	onFocusLeft,
 }) => {
-	const ref = useRef<HTMLDivElement>(null)
+	const ref = useRef<HTMLIFrameElement>(null)
+	const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(true)
+
+	const playVideo = useCallback(() => {
+		ref.current?.contentWindow?.postMessage(
+			'{"event":"command","func":"playVideo","args":""}',
+			'*'
+		)
+		setVideoIsPlaying(true)
+	}, [])
+
+	const stopVideo = useCallback(() => {
+		ref.current?.contentWindow?.postMessage(
+			'{"event":"command","func":"stopVideo","args":""}',
+			'*'
+		)
+		setVideoIsPlaying(false)
+	}, [])
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
@@ -43,11 +60,23 @@ const VideoWatch: FC<VideoWatchProps> = ({
 						onFocusLeft()
 					}
 					break
+				case 13:
+					videoIsPlaying ? stopVideo() : playVideo()
+					break
 				default:
 					break
 			}
 		},
-		[isFocused, onFocusDown, onFocusLeft, onFocusRight, onFocusUp]
+		[
+			isFocused,
+			onFocusDown,
+			onFocusLeft,
+			onFocusRight,
+			onFocusUp,
+			playVideo,
+			stopVideo,
+			videoIsPlaying,
+		]
 	)
 
 	useEffect(() => {
@@ -71,10 +100,11 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	}, [isFocused])
 
 	return (
-		<div className={`video-watch ${isFocused && 'video-watch--focused'}`} ref={ref}>
+		<div className={`video-watch ${isFocused && 'video-watch--focused'}`}>
 			<iframe
+				ref={ref}
 				className="video-watch__iframe"
-				src={`https://www.youtube.com/embed/${video.id}?autoplay=0&controls=0`}
+				src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&enablejsapi=1`}
 				title={video.snippet.title}
 				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 				allowFullScreen

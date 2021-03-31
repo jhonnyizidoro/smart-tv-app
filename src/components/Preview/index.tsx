@@ -58,7 +58,7 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 				<div className="preview__title">{video.snippet.title}</div>
 				<div className="preview__text">{video.snippet.description.slice(0, 250)}...</div>
 				<div className="preview__buttons">
-					<Button isBlue={darkMode} isFocused onClick={redirectToVideoPage}>
+					<Button isBlue={darkMode} onClick={() => redirectToVideoPage()}>
 						Assistir
 					</Button>
 				</div>

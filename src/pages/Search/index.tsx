@@ -8,9 +8,9 @@ import PageTitle from '../../components/PageTitle'
 import ReturnLink from '../../components/ReturnLink'
 import Grid from '../../components/Grid'
 import Preview from '../../components/Preview'
+import Hamburger from '../../components/Hamburger'
 
 import './styles.scss'
-import Hamburger from '../../components/Hamburger'
 
 interface SearchPageParams {
 	query: string

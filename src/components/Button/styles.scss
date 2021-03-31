@@ -14,21 +14,10 @@
     color: $white;
   }
 
-  &--blue-inverse {
-    background: transparent;
-    border: 3px solid $blue;
-    color: $blue;
-  }
-
   &--white {
     background: $white;
     border: 3px solid $white;
     color: $blue;
   }
 
-  &--white-inverse {
-    background: transparent;
-    border: 3px solid $white;
-    color: $white;
-  }
 }
