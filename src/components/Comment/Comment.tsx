@@ -3,7 +3,7 @@ import { useGlobalContext } from '../../contexts/global'
 
 import './Comment.scss'
 
-interface CommentProps extends Navegateble {
+interface CommentProps extends Focusable {
 	comment: CommentsItem
 }
 

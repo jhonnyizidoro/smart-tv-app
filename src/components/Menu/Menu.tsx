@@ -1,9 +1,9 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import { useGlobalContext } from '../../contexts/global'
 import { useHistory } from 'react-router-dom'
-import keyCodes from '../../util/keyCodes'
 
 import Checkbox from '../Checkbox'
+import Navegateble from '../Navegateble'
 
 import './Menu.scss'
 
@@ -11,12 +11,12 @@ import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg'
 
-const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
+const Menu: FC<Focusable> = ({ isFocused, onFocusRight }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)
 	const { toggleDarkMode, darkMode } = useGlobalContext()
 	const { push } = useHistory()
 
-	const handleClose = useCallback(() => {
+	const closeMenu = useCallback(() => {
 		if (onFocusRight) {
 			onFocusRight()
 		}
@@ -25,60 +25,47 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 	const redirect = useCallback(
 		(url: string) => {
 			push(url)
-			handleClose()
+			closeMenu()
 		},
-		[handleClose, push]
+		[closeMenu, push]
 	)
 
-	const handleKeyDown = useCallback(
-		(event: KeyboardEvent) => {
-			if (!isFocused) {
-				return
-			}
+	const handleUpArrowPress = () => {
+		if (focusedIndex !== 1) {
+			setFocusedIndex(focusedIndex - 1)
+		}
+	}
 
-			switch (event.keyCode) {
-				case keyCodes.right:
-					handleClose()
-					break
-				case keyCodes.down:
-					if (focusedIndex !== 4) {
-						setFocusedIndex(focusedIndex + 1)
-					}
-					break
-				case keyCodes.up:
-					if (focusedIndex !== 1) {
-						setFocusedIndex(focusedIndex - 1)
-					}
-					break
-				case keyCodes.enter:
-					switch (focusedIndex) {
-						case 1:
-							redirect('/')
-							break
-						case 2:
-							redirect('/favorites')
-							break
-						case 3:
-							toggleDarkMode()
-							break
-						default:
-							break
-					}
-					break
-				default:
-					break
-			}
-		},
-		[focusedIndex, handleClose, isFocused, redirect, toggleDarkMode]
-	)
+	const handleDownArrowPress = () => {
+		if (focusedIndex !== 3) {
+			setFocusedIndex(focusedIndex + 1)
+		}
+	}
 
-	useEffect(() => {
-		document.addEventListener('keydown', handleKeyDown)
-		return () => document.removeEventListener('keydown', handleKeyDown)
-	}, [handleKeyDown])
+	const handleEnterPress = () => {
+		switch (focusedIndex) {
+			case 1:
+				redirect('/')
+				break
+			case 2:
+				redirect('/favorites')
+				break
+			case 3:
+				toggleDarkMode()
+				break
+			default:
+				break
+		}
+	}
 
 	return (
-		<>
+		<Navegateble
+			isNavegateble={isFocused}
+			onRightArrowPress={closeMenu}
+			onEnterPress={handleEnterPress}
+			onUpArrowPress={handleUpArrowPress}
+			onDownArrowPress={handleDownArrowPress}
+		>
 			{isFocused && (
 				<div
 					className={`menu__background menu__background--${darkMode ? 'dark' : 'light'}`}
@@ -89,7 +76,7 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 					darkMode ? 'dark' : 'light'
 				}`}
 			>
-				<div className="menu__close" onClick={handleClose}>
+				<div className="menu__close" onClick={closeMenu}>
 					<CloseIcon height={15} width={15} className="menu__close__icon" />
 				</div>
 
@@ -119,7 +106,7 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 					<Checkbox />
 				</div>
 			</div>
-		</>
+		</Navegateble>
 	)
 }
 

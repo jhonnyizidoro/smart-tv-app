@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
-import keyCodes from '../../util/keyCodes'
 
 import './VideoWatch.scss'
+import Navegateble from '../Navegateble'
 
-interface VideoWatchProps extends Navegateble {
+interface VideoWatchProps extends Focusable {
 	video: VideosItem
 }
 
@@ -18,72 +18,14 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	const ref = useRef<HTMLIFrameElement>(null)
 	const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(true)
 
-	const playVideo = useCallback(() => {
+	const stopOrPlayVideo = useCallback(() => {
+		const action = videoIsPlaying ? 'stopVideo' : 'playVideo'
 		ref.current?.contentWindow?.postMessage(
-			'{"event":"command","func":"playVideo","args":""}',
+			`{ "event": "command", "func": "${action}", "args": "" }`,
 			'*'
 		)
-		setVideoIsPlaying(true)
-	}, [])
-
-	const stopVideo = useCallback(() => {
-		ref.current?.contentWindow?.postMessage(
-			'{"event":"command","func":"stopVideo","args":""}',
-			'*'
-		)
-		setVideoIsPlaying(false)
-	}, [])
-
-	const handleKeyDown = useCallback(
-		(event: KeyboardEvent) => {
-			if (!isFocused) {
-				return
-			}
-
-			switch (event.keyCode) {
-				case keyCodes.down:
-					if (onFocusDown) {
-						onFocusDown()
-					}
-					break
-				case keyCodes.up:
-					if (onFocusUp) {
-						onFocusUp()
-					}
-					break
-				case keyCodes.right:
-					if (onFocusRight) {
-						onFocusRight()
-					}
-					break
-				case keyCodes.left:
-					if (onFocusLeft) {
-						onFocusLeft()
-					}
-					break
-				case keyCodes.enter:
-					videoIsPlaying ? stopVideo() : playVideo()
-					break
-				default:
-					break
-			}
-		},
-		[
-			isFocused,
-			onFocusDown,
-			onFocusLeft,
-			onFocusRight,
-			onFocusUp,
-			playVideo,
-			stopVideo,
-			videoIsPlaying,
-		]
-	)
-
-	useEffect(() => {
-		document.addEventListener('keydown', handleKeyDown)
-		return () => document.removeEventListener('keydown', handleKeyDown)
-	}, [handleKeyDown])
+		setVideoIsPlaying(!videoIsPlaying)
+	}, [videoIsPlaying])
 
 	useEffect(() => {
 		if (isFocused && ref.current) {
@@ -101,16 +43,25 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	}, [isFocused])
 
 	return (
-		<div className={`video-watch ${isFocused && 'video-watch--focused'}`}>
-			<iframe
-				ref={ref}
-				className="video-watch__iframe"
-				src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&enablejsapi=1`}
-				title={video.snippet.title}
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowFullScreen
-			/>
-		</div>
+		<Navegateble
+			isNavegateble={isFocused}
+			onUpArrowPress={onFocusUp}
+			onEnterPress={stopOrPlayVideo}
+			onDownArrowPress={onFocusDown}
+			onLeftArrowPress={onFocusLeft}
+			onRightArrowPress={onFocusRight}
+		>
+			<div className={`video-watch ${isFocused && 'video-watch--focused'}`}>
+				<iframe
+					ref={ref}
+					className="video-watch__iframe"
+					src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&enablejsapi=1`}
+					title={video.snippet.title}
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowFullScreen
+				/>
+			</div>
+		</Navegateble>
 	)
 }
 

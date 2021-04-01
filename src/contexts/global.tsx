@@ -1,12 +1,12 @@
 import { createContext, FC, useState, useContext, useCallback } from 'react'
 
-interface GlobalContext extends DarkMode {
+interface GlobalContextValue extends DarkMode {
 	toggleDarkMode: () => void
 	favorites: string[]
 	toggleFromFavorites: (videoId: string) => void
 }
 
-const GlobalContext = createContext<GlobalContext>({} as GlobalContext)
+const GlobalContext = createContext<GlobalContextValue>({} as GlobalContextValue)
 
 export const GlobalProvider: FC = ({ children }) => {
 	const storedFavorites = localStorage.getItem('favorites')
@@ -44,4 +44,4 @@ export const GlobalProvider: FC = ({ children }) => {
 	)
 }
 
-export const useGlobalContext = (): GlobalContext => useContext(GlobalContext)
+export const useGlobalContext = (): GlobalContextValue => useContext(GlobalContext)

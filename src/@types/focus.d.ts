@@ -1,4 +1,4 @@
-interface Navegateble {
+interface Focusable {
 	isFocused: boolean
 	onFocusDown?: () => void
 	onFocusUp?: () => void

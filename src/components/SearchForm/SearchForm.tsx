@@ -8,7 +8,7 @@ import './SearchForm.scss'
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
 import { ReactComponent as ArrowLeftIcon } from '../../assets/icons/arrow-left.svg'
 
-interface SearchFormProps extends Navegateble {
+interface SearchFormProps extends Focusable {
 	onClick: () => void
 }
 
@@ -22,7 +22,7 @@ const SearchForm: FC<SearchFormProps> = ({
 	const formRef = useRef<HTMLFormElement>(null)
 	const { push } = useHistory()
 
-	const handleClose = useCallback(() => {
+	const handleFocusDown = useCallback(() => {
 		if (onFocusDown) {
 			onFocusDown()
 		}
@@ -46,7 +46,7 @@ const SearchForm: FC<SearchFormProps> = ({
 		[push]
 	)
 
-	const handleKeyboardKeyPress = useCallback(
+	const handleKeyboardInput = useCallback(
 		(input: string) => {
 			const currentInputValue = inputRef.current?.value || ''
 
@@ -108,7 +108,7 @@ const SearchForm: FC<SearchFormProps> = ({
 						className="search-form__close__icon__wrapper"
 						onClick={event => {
 							event.stopPropagation()
-							handleClose()
+							handleFocusDown()
 						}}
 					>
 						<ArrowLeftIcon width={25} height={25} className="search-form__close__icon" />
@@ -119,9 +119,9 @@ const SearchForm: FC<SearchFormProps> = ({
 			{isFocused && (
 				<Keyboard
 					isFocused
-					onFocusDown={handleClose}
+					onFocusDown={handleFocusDown}
 					onFocusLeft={handleFocusLeft}
-					onKeyPress={handleKeyboardKeyPress}
+					onKeyPress={handleKeyboardInput}
 				/>
 			)}
 		</>

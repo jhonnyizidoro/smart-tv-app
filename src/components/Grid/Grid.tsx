@@ -1,12 +1,12 @@
-import { FC, useCallback, useEffect, useState } from 'react'
-import keyCodes from '../../util/keyCodes'
+import { FC, useState } from 'react'
 
 import SectionTitle from '../SectionTitle'
 import GridItem from '../GridItem'
+import Navegateble from '../Navegateble'
 
 import './Grid.scss'
 
-interface GridProps extends Navegateble {
+interface GridProps extends Focusable {
 	title?: string
 	videos: VideosItem[]
 	columns: 3 | 4
@@ -16,99 +16,80 @@ interface GridProps extends Navegateble {
 const Grid: FC<GridProps> = ({
 	title,
 	videos,
-	isFocused,
 	columns,
+	onItemSelect,
+	isFocused,
 	onFocusRight,
 	onFocusLeft,
 	onFocusDown,
 	onFocusUp,
-	onItemSelect,
 }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)
 
-	const handleKeyDown = useCallback(
-		(event: KeyboardEvent) => {
-			if (!isFocused) {
-				return
+	const handleUpArrowPress = () => {
+		if (focusedIndex <= columns) {
+			if (onFocusUp) {
+				onFocusUp()
 			}
+		} else {
+			setFocusedIndex(focusedIndex - columns)
+		}
+	}
 
-			switch (event.keyCode) {
-				case keyCodes.down:
-					if (focusedIndex > videos.length - columns) {
-						if (onFocusDown) {
-							onFocusDown()
-						}
-					} else {
-						setFocusedIndex(focusedIndex + columns)
-					}
-					break
-				case keyCodes.up:
-					if (focusedIndex <= columns) {
-						if (onFocusUp) {
-							onFocusUp()
-						}
-					} else {
-						setFocusedIndex(focusedIndex - columns)
-					}
-					break
-				case keyCodes.right:
-					if (focusedIndex % columns === 0) {
-						if (onFocusRight) {
-							onFocusRight()
-						}
-					} else if (focusedIndex < videos.length) {
-						setFocusedIndex(focusedIndex + 1)
-					}
-					break
-				case keyCodes.left:
-					if (focusedIndex % columns === 1) {
-						if (onFocusLeft) {
-							onFocusLeft()
-						}
-					} else {
-						setFocusedIndex(focusedIndex - 1)
-					}
-					break
-				case keyCodes.enter:
-					onItemSelect(videos[focusedIndex - 1])
-					break
-				default:
-					break
+	const handleDownArrowPress = () => {
+		if (focusedIndex > videos.length - columns) {
+			if (onFocusDown) {
+				onFocusDown()
 			}
-		},
-		[
-			columns,
-			focusedIndex,
-			isFocused,
-			onFocusDown,
-			onFocusLeft,
-			onFocusRight,
-			onFocusUp,
-			onItemSelect,
-			videos,
-		]
-	)
+		} else {
+			setFocusedIndex(focusedIndex + columns)
+		}
+	}
 
-	useEffect(() => {
-		document.addEventListener('keydown', handleKeyDown)
-		return () => document.removeEventListener('keydown', handleKeyDown)
-	}, [handleKeyDown])
+	const handleRightArrowPress = () => {
+		if (focusedIndex % columns === 0) {
+			if (onFocusRight) {
+				onFocusRight()
+			}
+		} else if (focusedIndex < videos.length) {
+			setFocusedIndex(focusedIndex + 1)
+		}
+	}
+
+	const handleLeftArrowPress = () => {
+		if (focusedIndex % columns === 1) {
+			if (onFocusLeft) {
+				onFocusLeft()
+			}
+		} else {
+			setFocusedIndex(focusedIndex - 1)
+		}
+	}
 
 	return (
-		<div className="grid">
-			{title && <SectionTitle>{title}</SectionTitle>}
-			<div className="grid__items">
-				{videos.map((video, index) => (
-					<GridItem
-						video={video}
-						key={video.id}
-						size={columns === 4 ? 'quarter' : 'third'}
-						isFocused={focusedIndex === index + 1 && isFocused}
-						onClick={clickedVideo => onItemSelect(clickedVideo)}
-					/>
-				))}
+		<Navegateble
+			isNavegateble={isFocused}
+			onUpArrowPress={handleUpArrowPress}
+			onLeftArrowPress={handleLeftArrowPress}
+			onDownArrowPress={handleDownArrowPress}
+			onRightArrowPress={handleRightArrowPress}
+			onEnterPress={() => onItemSelect(videos[focusedIndex - 1])}
+		>
+			<div className="grid">
+				{title && <SectionTitle>{title}</SectionTitle>}
+				<div className="grid__items">
+					{videos.map((video, index) => (
+						<GridItem
+							video={video}
+							key={video.id}
+							size={columns === 4 ? 'quarter' : 'third'}
+							isFocused={focusedIndex === index + 1 && isFocused}
+							onClick={clickedVideo => onItemSelect(clickedVideo)}
+						/>
+					))}
+				</div>
 			</div>
-		</div>
+		</Navegateble>
 	)
 }
 

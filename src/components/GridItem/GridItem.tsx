@@ -3,8 +3,9 @@ import { useGlobalContext } from '../../contexts/global'
 
 import './GtidItem.scss'
 
-interface GridItemProps extends Navegateble {
+interface GridItemProps {
 	video: VideosItem
+	isFocused: boolean
 	size: 'quarter' | 'third'
 	onClick: (video: VideosItem) => void
 }
