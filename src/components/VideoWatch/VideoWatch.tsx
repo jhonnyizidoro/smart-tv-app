@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import keyCodes from '../../util/keyCodes'
 
 import './VideoWatch.scss'
 
@@ -40,27 +41,27 @@ const VideoWatch: FC<VideoWatchProps> = ({
 			}
 
 			switch (event.keyCode) {
-				case 40:
+				case keyCodes.down:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					videoIsPlaying ? stopVideo() : playVideo()
 					break
 				default:

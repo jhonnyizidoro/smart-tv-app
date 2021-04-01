@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGlobalContext } from '../../contexts/global'
+import keyCodes from '../../util/keyCodes'
 
 import Button from '../Button'
 
@@ -27,12 +28,12 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 			}
 
 			switch (event.keyCode) {
-				case 38:
+				case keyCodes.up:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					redirectToVideoPage()
 					break
 				default:

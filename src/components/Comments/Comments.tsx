@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react'
+import keyCodes from '../../util/keyCodes'
 
 import Comment from '../Comment'
 
@@ -24,7 +25,7 @@ const Comments: FC<CommentsProps> = ({
 			}
 
 			switch (event.keyCode) {
-				case 38:
+				case keyCodes.up:
 					if (focusedIndex === 1) {
 						if (onFocusUp) {
 							onFocusUp()
@@ -33,17 +34,17 @@ const Comments: FC<CommentsProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 40:
+				case keyCodes.down:
 					if (focusedIndex !== comments.length) {
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}

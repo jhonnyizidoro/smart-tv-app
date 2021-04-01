@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react'
+import keyCodes from '../../util/keyCodes'
 
 import SectionTitle from '../SectionTitle'
 import GridItem from '../GridItem'
@@ -32,7 +33,7 @@ const Grid: FC<GridProps> = ({
 			}
 
 			switch (event.keyCode) {
-				case 40:
+				case keyCodes.down:
 					if (focusedIndex > videos.length - columns) {
 						if (onFocusDown) {
 							onFocusDown()
@@ -41,7 +42,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex + columns)
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (focusedIndex <= columns) {
 						if (onFocusUp) {
 							onFocusUp()
@@ -50,7 +51,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex - columns)
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (focusedIndex % columns === 0) {
 						if (onFocusRight) {
 							onFocusRight()
@@ -59,7 +60,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (focusedIndex % columns === 1) {
 						if (onFocusLeft) {
 							onFocusLeft()
@@ -68,7 +69,7 @@ const Grid: FC<GridProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					onItemSelect(videos[focusedIndex - 1])
 					break
 				default:

@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGlobalContext } from '../../contexts/global'
+import keyCodes from '../../util/keyCodes'
 
 import './ReturnLink.scss'
 
@@ -23,27 +24,27 @@ const ReturnLink: FC<Navegateble> = ({
 			}
 
 			switch (event.keyCode) {
-				case 40:
+				case keyCodes.down:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					goBack()
 					break
 				default:

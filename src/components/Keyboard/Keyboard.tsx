@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { useGlobalContext } from '../../contexts/global'
+import keyCodes from '../../util/keyCodes'
 
 import './Keyboard.scss'
 
@@ -25,12 +26,12 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent) => {
 			switch (event.keyCode) {
-				case 38:
+				case keyCodes.up:
 					if (focusedRow !== 0) {
 						setFocusedRow(focusedRow - 1)
 					}
 					break
-				case 40:
+				case keyCodes.down:
 					if (focusedRow !== 3) {
 						if (keymap[focusedRow + 1].length - 1 < focusedIndex) {
 							setFocusedIndex(keymap[focusedRow + 1].length - 1)
@@ -42,12 +43,12 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 						}
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (focusedIndex < keymap[focusedRow].length - 1) {
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (focusedIndex !== 0) {
 						setFocusedIndex(focusedIndex - 1)
 					} else {
@@ -56,7 +57,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 						}
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					onKeyPress(keymap[focusedRow][focusedIndex])
 					break
 				default:

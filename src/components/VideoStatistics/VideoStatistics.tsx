@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useGlobalContext } from '../../contexts/global'
+import keyCodes from '../../util/keyCodes'
 
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg'
 import { ReactComponent as LikeIcon } from '../../assets/icons/like.svg'
@@ -29,27 +30,27 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 			}
 
 			switch (event.keyCode) {
-				case 40:
+				case keyCodes.down:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					toggleFromFavorites(video.id)
 					break
 				default:

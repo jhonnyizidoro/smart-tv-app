@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 import { useGlobalContext } from '../../contexts/global'
 import { useHistory } from 'react-router-dom'
+import keyCodes from '../../util/keyCodes'
 
 import Checkbox from '../Checkbox'
 
@@ -36,20 +37,20 @@ const Menu: FC<Navegateble> = ({ isFocused, onFocusRight }) => {
 			}
 
 			switch (event.keyCode) {
-				case 39:
+				case keyCodes.right:
 					handleClose()
 					break
-				case 40:
+				case keyCodes.down:
 					if (focusedIndex !== 4) {
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (focusedIndex !== 1) {
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					switch (focusedIndex) {
 						case 1:
 							redirect('/')

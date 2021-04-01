@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import keyCodes from '../../util/keyCodes'
 
 import Button from '../Button'
 
@@ -32,22 +33,22 @@ const Banner: FC<BannerProps> = ({
 			}
 
 			switch (event.keyCode) {
-				case 40:
+				case keyCodes.down:
 					if (onFocusDown) {
 						onFocusDown()
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (onFocusUp) {
 						onFocusUp()
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					redirectToVideoPage()
 					break
 				default:

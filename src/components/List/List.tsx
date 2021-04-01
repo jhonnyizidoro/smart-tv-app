@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useState } from 'react'
+import keyCodes from '../../util/keyCodes'
 
 import SectionTitle from '../SectionTitle'
 import ListItem from '../ListItem'
@@ -28,7 +29,7 @@ const List: FC<ListProps> = ({
 			}
 
 			switch (event.keyCode) {
-				case 40:
+				case keyCodes.down:
 					if (focusedIndex === videos.length) {
 						if (onFocusDown) {
 							onFocusDown()
@@ -37,7 +38,7 @@ const List: FC<ListProps> = ({
 						setFocusedIndex(focusedIndex + 1)
 					}
 					break
-				case 38:
+				case keyCodes.up:
 					if (focusedIndex === 1) {
 						if (onFocusUp) {
 							onFocusUp()
@@ -46,17 +47,17 @@ const List: FC<ListProps> = ({
 						setFocusedIndex(focusedIndex - 1)
 					}
 					break
-				case 39:
+				case keyCodes.right:
 					if (onFocusRight) {
 						onFocusRight()
 					}
 					break
-				case 37:
+				case keyCodes.left:
 					if (onFocusLeft) {
 						onFocusLeft()
 					}
 					break
-				case 13:
+				case keyCodes.enter:
 					onItemSelect(videos[focusedIndex - 1])
 					break
 				default:
