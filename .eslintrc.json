@@ -4,11 +4,16 @@
     "es2021": true
   },
   "extends": [
+    "react-app",
+    "react-app/jest",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "prettier",
+    "plugin:testing-library/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -22,7 +27,9 @@
     "react",
     "@typescript-eslint",
     "prettier",
-    "react-hooks"
+    "react-hooks",
+    "testing-library",
+    "jest-dom"
   ],
   "rules": {
     "indent": [
