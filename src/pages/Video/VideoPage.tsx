@@ -19,7 +19,6 @@ interface VideoPageParams {
 }
 
 const VideoPage: FC = () => {
-	const { getVideosById, getVideosByCategory, getCommentsByVideoId } = useYoutubeApi()
 	const { id } = useParams<VideoPageParams>()
 
 	const [focusedIndex, setFocusedIndex] = useState<number>(4)
@@ -30,6 +29,13 @@ const VideoPage: FC = () => {
 	const [video, setVideo] = useState<VideosItem>()
 	const [similarVideos, setSimilarVideos] = useState<VideosItem[]>()
 	const [comments, setComments] = useState<CommentsItem[]>()
+
+	const {
+		getVideosById,
+		getVideosByCategory,
+		getCommentsByVideoId,
+		getMostPopularVideos,
+	} = useYoutubeApi()
 
 	const loadInitialData = useCallback(async () => {
 		const [videoResponse, commentsResponse] = await Promise.all([
@@ -43,8 +49,13 @@ const VideoPage: FC = () => {
 		const categoryId = videoResponse.items[0].snippet.categoryId
 		const similarVideosResponse = await getVideosByCategory(categoryId, 15)
 
-		setSimilarVideos(similarVideosResponse.items)
-	}, [getCommentsByVideoId, getVideosByCategory, getVideosById, id])
+		if (similarVideosResponse.items?.length > 0) {
+			setSimilarVideos(similarVideosResponse.items)
+		} else {
+			const mostPopularVideosResponse = await getMostPopularVideos(15)
+			setSimilarVideos(mostPopularVideosResponse.items)
+		}
+	}, [getCommentsByVideoId, getMostPopularVideos, getVideosByCategory, getVideosById, id])
 
 	const showMenu = useCallback(() => {
 		setFocusedIndexBeforeMenu(focusedIndex)
