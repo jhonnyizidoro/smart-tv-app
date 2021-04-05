@@ -1,5 +1,6 @@
-import { FC } from 'react'
+import { FC, useEffect, useRef } from 'react'
 import { useGlobalContext } from '../../contexts/global'
+import { scrollElementToCenter } from '../../utils/scroll'
 
 import Navegateble from '../Navegateble'
 
@@ -23,6 +24,13 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 	onFocusLeft,
 }) => {
 	const { favorites, toggleFromFavorites, darkMode } = useGlobalContext()
+	const ref = useRef<HTMLDivElement>(null)
+
+	useEffect(() => {
+		if (isFocused && ref.current) {
+			scrollElementToCenter(ref.current)
+		}
+	}, [isFocused])
 
 	return (
 		<Navegateble
@@ -34,6 +42,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 			onEnterPress={() => toggleFromFavorites(video.id)}
 		>
 			<div
+				ref={ref}
 				className={`video-statistics video-statistics--${darkMode ? 'dark' : 'light'}`}
 			>
 				<div className="video-statistics__title">{video.snippet.title}</div>
