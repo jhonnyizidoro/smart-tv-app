@@ -16,7 +16,7 @@ const FavoritesPage: FC = () => {
 	const { getVideosById } = useYoutubeApi()
 	const { favorites } = useGlobalContext()
 
-	const [focusedIndex, setFocusedIndex] = useState<number>(4)
+	const [focusedIndex, setFocusedIndex] = useState<number>(favorites.length ? 4 : 3)
 	const [previewVideo, setPreviewVideo] = useState<VideosItem | null>()
 	const [focusedIndexBeforePreview, setFocusedIndexBeforePreview] = useState<number>(4)
 	const [focusedIndexBeforeMenu, setFocusedIndexBeforeMenu] = useState<number>(4)
@@ -71,13 +71,13 @@ const FavoritesPage: FC = () => {
 
 			<div className="favorites-page">
 				<div className="favorites-page__header">
-					<PageTitle>Favoritos</PageTitle>
+					<PageTitle>{favorites.length ? 'Favoritos' : 'Nada aqui ainda ):'}</PageTitle>
 
 					<ReturnLink
 						isFocused={focusedIndex === 3}
 						onFocusLeft={() => showMenu()}
 						onFocusUp={() => setFocusedIndex(2)}
-						onFocusDown={() => setFocusedIndex(4)}
+						onFocusDown={favorites.length ? () => setFocusedIndex(4) : undefined}
 					/>
 				</div>
 
