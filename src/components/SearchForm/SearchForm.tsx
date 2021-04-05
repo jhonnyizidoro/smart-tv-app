@@ -1,5 +1,6 @@
 import { FC, FormEvent, useCallback, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
+import { scrollToTop } from '../../utils/scroll'
 
 import Keyboard from '../Keyboard'
 
@@ -73,11 +74,7 @@ const SearchForm: FC<SearchFormProps> = ({
 
 	useEffect(() => {
 		if (isFocused) {
-			window.scrollBy({
-				left: 0,
-				top: -window.innerHeight,
-				behavior: 'smooth',
-			})
+			scrollToTop()
 		}
 	}, [isFocused])
 

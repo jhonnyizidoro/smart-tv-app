@@ -1,4 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react'
+import { scrollElementToCenter } from '../../utils/scroll'
 
 import './VideoWatch.scss'
 import Navegateble from '../Navegateble'
@@ -29,16 +30,7 @@ const VideoWatch: FC<VideoWatchProps> = ({
 
 	useEffect(() => {
 		if (isFocused && ref.current) {
-			const centerPosition =
-				ref.current.getBoundingClientRect().top -
-				window.innerHeight / 2 +
-				ref.current.getBoundingClientRect().height / 2
-
-			window.scrollBy({
-				left: 0,
-				top: centerPosition,
-				behavior: 'smooth',
-			})
+			scrollElementToCenter(ref.current)
 		}
 	}, [isFocused])
 

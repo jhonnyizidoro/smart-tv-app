@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react'
 import { useGlobalContext } from '../../contexts/global'
+import { scrollElementToCenter } from '../../utils/scroll'
 
 import './ListItem.scss'
 
@@ -15,16 +16,7 @@ const ListItem: FC<ListItemProps> = ({ video, isFocused, onClick }) => {
 
 	useEffect(() => {
 		if (isFocused && ref.current) {
-			const centerPosition =
-				ref.current.getBoundingClientRect().top -
-				window.innerHeight / 2 +
-				ref.current.getBoundingClientRect().height / 2
-
-			window.scrollBy({
-				left: 0,
-				top: centerPosition,
-				behavior: 'smooth',
-			})
+			scrollElementToCenter(ref.current)
 		}
 	}, [isFocused])
 

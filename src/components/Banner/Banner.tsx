@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { scrollToTop } from '../../utils/scroll'
 
 import Navegateble from '../Navegateble'
 import Button from '../Button'
@@ -25,11 +26,7 @@ const Banner: FC<BannerProps> = ({
 
 	useEffect(() => {
 		if (isFocused) {
-			window.scrollBy({
-				left: 0,
-				top: -window.innerHeight,
-				behavior: 'smooth',
-			})
+			scrollToTop()
 		}
 	}, [isFocused])
 
