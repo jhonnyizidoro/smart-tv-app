@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 
 import SectionTitle from '../SectionTitle'
 import GridItem from '../GridItem'
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 import './Grid.scss'
 
@@ -67,8 +67,8 @@ const Grid: FC<GridProps> = ({
 	}
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onUpArrowPress={handleUpArrowPress}
 			onLeftArrowPress={handleLeftArrowPress}
 			onDownArrowPress={handleDownArrowPress}
@@ -89,7 +89,7 @@ const Grid: FC<GridProps> = ({
 					))}
 				</div>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

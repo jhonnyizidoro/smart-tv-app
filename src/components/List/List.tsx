@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 
 import SectionTitle from '../SectionTitle'
 import ListItem from '../ListItem'
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 interface ListProps extends Focusable {
 	title: string
@@ -43,8 +43,8 @@ const List: FC<ListProps> = ({
 	}
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onLeftArrowPress={onFocusLeft}
 			onRightArrowPress={onFocusRight}
 			onUpArrowPress={handleUpArrowPress}
@@ -64,7 +64,7 @@ const List: FC<ListProps> = ({
 					))}
 				</ul>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

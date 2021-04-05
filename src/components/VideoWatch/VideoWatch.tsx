@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { scrollElementToCenter } from '../../utils/scroll'
 
 import './VideoWatch.scss'
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 interface VideoWatchProps extends Focusable {
 	video: VideosItem
@@ -35,8 +35,8 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	}, [isFocused])
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onUpArrowPress={onFocusUp}
 			onEnterPress={stopOrPlayVideo}
 			onDownArrowPress={onFocusDown}
@@ -53,7 +53,7 @@ const VideoWatch: FC<VideoWatchProps> = ({
 					allowFullScreen
 				/>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

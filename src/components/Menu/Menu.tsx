@@ -3,7 +3,7 @@ import { useGlobalContext } from '../../contexts/global'
 import { useHistory } from 'react-router-dom'
 
 import Checkbox from '../Checkbox'
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 import './Menu.scss'
 
@@ -59,8 +59,8 @@ const Menu: FC<Focusable> = ({ isFocused, onFocusRight }) => {
 	}
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onRightArrowPress={closeMenu}
 			onEnterPress={handleEnterPress}
 			onUpArrowPress={handleUpArrowPress}
@@ -106,7 +106,7 @@ const Menu: FC<Focusable> = ({ isFocused, onFocusRight }) => {
 					<Checkbox />
 				</div>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

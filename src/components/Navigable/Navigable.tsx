@@ -8,8 +8,8 @@ const keyCodes = {
 	enter: 13,
 }
 
-interface NavegatebleProps {
-	isNavegateble: boolean
+interface NavigableProps {
+	isNavigable: boolean
 	onDownArrowPress?: () => void
 	onUpArrowPress?: () => void
 	onLeftArrowPress?: () => void
@@ -17,9 +17,9 @@ interface NavegatebleProps {
 	onEnterPress?: () => void
 }
 
-const Navegateble: FC<NavegatebleProps> = ({
+const Navigable: FC<NavigableProps> = ({
 	children,
-	isNavegateble,
+	isNavigable,
 	onRightArrowPress,
 	onUpArrowPress,
 	onLeftArrowPress,
@@ -28,7 +28,7 @@ const Navegateble: FC<NavegatebleProps> = ({
 }) => {
 	const handleKeyPress = useCallback(
 		(event: KeyboardEvent) => {
-			if (!isNavegateble) {
+			if (!isNavigable) {
 				return
 			}
 
@@ -63,7 +63,7 @@ const Navegateble: FC<NavegatebleProps> = ({
 			}
 		},
 		[
-			isNavegateble,
+			isNavigable,
 			onEnterPress,
 			onDownArrowPress,
 			onLeftArrowPress,
@@ -80,4 +80,4 @@ const Navegateble: FC<NavegatebleProps> = ({
 	return <>{children}</>
 }
 
-export default Navegateble
+export default Navigable

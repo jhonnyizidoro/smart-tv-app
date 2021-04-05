@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from 'react'
 import { useGlobalContext } from '../../contexts/global'
 import { scrollElementToCenter } from '../../utils/scroll'
 
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 import { ReactComponent as EyeIcon } from '../../assets/icons/eye.svg'
 import { ReactComponent as LikeIcon } from '../../assets/icons/like.svg'
@@ -33,8 +33,8 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 	}, [isFocused])
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onUpArrowPress={onFocusUp}
 			onDownArrowPress={onFocusDown}
 			onLeftArrowPress={onFocusLeft}
@@ -79,7 +79,7 @@ const VideoStatistics: FC<VideoStatisticsProps> = ({
 					</div>
 				</div>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

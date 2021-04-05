@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGlobalContext } from '../../contexts/global'
 
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 import './ReturnLink.scss'
 
@@ -19,8 +19,8 @@ const ReturnLink: FC<Focusable> = ({
 	const { darkMode } = useGlobalContext()
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onEnterPress={goBack}
 			onUpArrowPress={onFocusUp}
 			onDownArrowPress={onFocusDown}
@@ -40,7 +40,7 @@ const ReturnLink: FC<Focusable> = ({
 				/>
 				Voltar
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

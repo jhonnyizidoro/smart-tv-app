@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 
 import Comment from '../Comment'
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 import './Comments.scss'
 
@@ -35,8 +35,8 @@ const Comments: FC<CommentsProps> = ({
 	}
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onLeftArrowPress={onFocusLeft}
 			onRightArrowPress={onFocusRight}
 			onUpArrowPress={handleUpArrowPress}
@@ -51,7 +51,7 @@ const Comments: FC<CommentsProps> = ({
 					/>
 				))}
 			</ul>
-		</Navegateble>
+		</Navigable>
 	)
 }
 export default Comments

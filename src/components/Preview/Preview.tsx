@@ -2,7 +2,7 @@ import { FC, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useGlobalContext } from '../../contexts/global'
 
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 import Button from '../Button'
 
 import './Preview.scss'
@@ -22,8 +22,8 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 	}, [onFocusUp, push, video])
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onUpArrowPress={onFocusUp}
 			onEnterPress={redirectToVideoPage}
 		>
@@ -55,7 +55,7 @@ const Preview: FC<PreviewProps> = ({ video, isFocused, onFocusUp }) => {
 					/>
 				</div>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

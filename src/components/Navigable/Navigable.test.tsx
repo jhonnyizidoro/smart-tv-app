@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import Navegateble from './Navegateble'
+import Navigable from './Navigable'
 import userEvent from '@testing-library/user-event'
 
 test('navigation is working', () => {
@@ -10,8 +10,8 @@ test('navigation is working', () => {
 	const enterMock = jest.fn()
 
 	render(
-		<Navegateble
-			isNavegateble
+		<Navigable
+			isNavigable
 			onEnterPress={enterMock}
 			onRightArrowPress={arrowRightMock}
 			onLeftArrowPress={arrowLeftMock}
@@ -44,8 +44,8 @@ test('navigation is blocked when unfocused', () => {
 	const enterMock = jest.fn()
 
 	render(
-		<Navegateble
-			isNavegateble={false}
+		<Navigable
+			isNavigable={false}
 			onEnterPress={enterMock}
 			onRightArrowPress={arrowRightMock}
 			onLeftArrowPress={arrowLeftMock}

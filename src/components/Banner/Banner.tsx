@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { scrollToTop } from '../../utils/scroll'
 
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 import Button from '../Button'
 
 import './Banner.scss'
@@ -31,8 +31,8 @@ const Banner: FC<BannerProps> = ({
 	}, [isFocused])
 
 	return (
-		<Navegateble
-			isNavegateble={isFocused}
+		<Navigable
+			isNavigable={isFocused}
 			onDownArrowPress={onFocusDown}
 			onUpArrowPress={onFocusUp}
 			onLeftArrowPress={onFocusLeft}
@@ -60,7 +60,7 @@ const Banner: FC<BannerProps> = ({
 					</Button>
 				</div>
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 

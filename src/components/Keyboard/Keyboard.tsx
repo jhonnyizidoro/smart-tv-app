@@ -1,7 +1,7 @@
 import { FC, useMemo, useState } from 'react'
 import { useGlobalContext } from '../../contexts/global'
 
-import Navegateble from '../Navegateble'
+import Navigable from '../Navigable'
 
 import './Keyboard.scss'
 
@@ -60,8 +60,8 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 	}
 
 	return (
-		<Navegateble
-			isNavegateble
+		<Navigable
+			isNavigable
 			onUpArrowPress={handleUpArrowPress}
 			onDownArrowPress={handleDownArrowPress}
 			onLeftArrowPress={handleLeftArrowPress}
@@ -92,7 +92,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 					</div>
 				))}
 			</div>
-		</Navegateble>
+		</Navigable>
 	)
 }
 
