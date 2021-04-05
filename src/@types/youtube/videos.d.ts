@@ -23,7 +23,7 @@ interface VideosItem {
 		description: string
 		liveBroadcastContent: string
 		publishedAt: string
-		tags: string[]
+		tags?: string[]
 		thumbnails: {
 			default: VideosThumbnail
 			high: VideosThumbnail
