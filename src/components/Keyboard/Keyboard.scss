@@ -22,10 +22,11 @@
     flex-grow: 1;
     outline: 0;
     padding: 15px 0;
+    max-width: 250px;
   }
 
   &__key--regular {
-    max-width: 120px;
+    max-width: 110px;
   }
 
   &__key--focused {
