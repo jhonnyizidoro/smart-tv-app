@@ -1,15 +1,15 @@
 import { FC, useCallback, useState } from 'react'
-import { useGlobalContext } from '../../contexts/global'
+
 import { useHistory } from 'react-router-dom'
 
 import Checkbox from '../Checkbox'
 import Navigable from '../Navigable'
-
-import './Menu.scss'
-
 import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg'
 import { ReactComponent as StarIcon } from '../../assets/icons/star.svg'
 import { ReactComponent as CloseIcon } from '../../assets/icons/close.svg'
+import { useGlobalContext } from '../../contexts/global'
+
+import './Menu.scss'
 
 const Menu: FC<Focusable> = ({ isFocused, onFocusRight }) => {
 	const [focusedIndex, setFocusedIndex] = useState<number>(1)

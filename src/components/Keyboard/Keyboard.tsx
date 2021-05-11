@@ -1,7 +1,7 @@
-import { FC, useMemo, useState } from 'react'
-import { useGlobalContext } from '../../contexts/global'
+import { FC, useCallback, useMemo, useState } from 'react'
 
 import Navigable from '../Navigable'
+import { useGlobalContext } from '../../contexts/global'
 
 import './Keyboard.scss'
 
@@ -28,7 +28,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 		[]
 	)
 
-	const handleUpArrowPress = () => {
+	const handleUpArrowPress = (): void => {
 		if (focusedRow !== 0) {
 			if (focusedRow === keymap.length - 1) {
 				const newFocusedColumn =
@@ -42,7 +42,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 		}
 	}
 
-	const handleDownArrowPress = () => {
+	const handleDownArrowPress = (): void => {
 		if (focusedRow !== keymap.length - 1) {
 			if (focusedRow === keymap.length - 2) {
 				setFocusedColumnBeforeLastRow(focusedColumn)
@@ -62,13 +62,17 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 		}
 	}
 
-	const handleLeftArrowPress = () => {
+	const handleLeftArrowPress = useCallback(() => {
 		if (focusedColumn !== 0) {
 			setFocusedColumn(focusedColumn - 1)
 		} else {
 			onFocusLeft?.()
 		}
-	}
+	}, [focusedColumn, onFocusLeft])
+
+	const handleEnterPress = useCallback(() => {
+		onKeyPress(keymap[focusedRow][focusedColumn])
+	}, [focusedColumn, focusedRow, keymap, onKeyPress])
 
 	return (
 		<Navigable
@@ -77,7 +81,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 			onDownArrowPress={handleDownArrowPress}
 			onLeftArrowPress={handleLeftArrowPress}
 			onRightArrowPress={handleRightArrowPress}
-			onEnterPress={() => onKeyPress(keymap[focusedRow][focusedColumn])}
+			onEnterPress={handleEnterPress}
 		>
 			<div className={`keyboard keyboard--${darkMode ? 'dark' : 'light'}`}>
 				{keymap.map((row, rowIndex) => (
@@ -88,9 +92,7 @@ const Keyboard: FC<KeyboardProps> = ({ onKeyPress, onFocusLeft, onFocusDown }) =
 								aria-label={`Digitar ${key}`}
 								onClick={() => onKeyPress(key)}
 								className={`keyboard__key keyboard__key--${
-									key !== 'enter' && key !== 'backspace' && key !== 'space'
-										? 'regular'
-										: 'large'
+									key.length === 1 ? 'regular' : 'large'
 								} ${
 									columnIndex === focusedColumn &&
 									rowIndex === focusedRow &&

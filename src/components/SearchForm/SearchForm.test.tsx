@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import SearchForm from './SearchForm'
 import { BrowserRouter } from 'react-router-dom'
 import userEvent from '@testing-library/user-event'
@@ -30,15 +30,14 @@ test('search form focus', () => {
 	userEvent.keyboard('{ArrowLeft}')
 	expect(focusLeftMock).toHaveBeenCalled()
 
-	userEvent.keyboard('{ArrowDown}')
-	userEvent.keyboard('{ArrowDown}')
-	userEvent.keyboard('{ArrowDown}')
-	userEvent.keyboard('{ArrowDown}')
+	for (let i = 0; i < 7; i++) {
+		userEvent.keyboard('{ArrowDown}')
+	}
 	expect(focusDownMock).toHaveBeenCalled()
 })
 
 test('search form redirect', () => {
-	const { container } = render(<SearchForm isFocused onClick={() => null} />, {
+	const { container, getByText } = render(<SearchForm isFocused onClick={() => null} />, {
 		wrapper: BrowserRouter,
 	})
 
@@ -47,20 +46,8 @@ test('search form redirect', () => {
 
 	input.value = 'query'
 
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowRight}')
-	userEvent.keyboard('{ArrowDown}')
-	userEvent.keyboard('{ArrowDown}')
-
-	userEvent.keyboard('{Enter}')
+	const enterButton = getByText('enter')
+	userEvent.click(enterButton)
 	expect(mockHistoryPush).toHaveBeenCalledWith('/search/query')
 
 	const form = container.querySelector('form') as HTMLFormElement
