@@ -30,6 +30,10 @@
     margin-bottom: 5px;
     max-height: 40px;
     overflow: hidden;
+
+    @include fullHd {
+      max-height: fullHdSize(40);
+    }
   }
 
   &__subtitle {

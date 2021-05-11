@@ -1,0 +1,9 @@
+@function fullHdSize ($hdSize) {
+  @return #{$hdSize * 1.5}px;
+}
+
+@mixin fullHd {
+  @media (min-width: 1900px) {
+    @content;
+  }
+}

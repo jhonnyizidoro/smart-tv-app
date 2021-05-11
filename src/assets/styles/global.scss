@@ -17,11 +17,16 @@
 }
 
 body,
+html,
 input,
 button {
   font-family: 'Proxima Nova', sans-serif;
   font-size: 16px;
   font-weight: $fontRegular;
+
+  @include fullHd {
+    font-size: fullHdSize(16);
+  }
 }
 
 a {
