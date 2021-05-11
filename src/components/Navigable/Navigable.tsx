@@ -34,29 +34,19 @@ const Navigable: FC<NavigableProps> = ({
 
 			switch (event.keyCode) {
 				case keyCodes.down:
-					if (onDownArrowPress) {
-						onDownArrowPress()
-					}
+					onDownArrowPress?.()
 					break
 				case keyCodes.up:
-					if (onUpArrowPress) {
-						onUpArrowPress()
-					}
+					onUpArrowPress?.()
 					break
 				case keyCodes.right:
-					if (onRightArrowPress) {
-						onRightArrowPress()
-					}
+					onRightArrowPress?.()
 					break
 				case keyCodes.left:
-					if (onLeftArrowPress) {
-						onLeftArrowPress()
-					}
+					onLeftArrowPress?.()
 					break
 				case keyCodes.enter:
-					if (onEnterPress) {
-						onEnterPress()
-					}
+					onEnterPress?.()
 					break
 				default:
 					break
