@@ -57,6 +57,11 @@ const SearchForm: FC<SearchFormProps> = ({
 						inputRef.current.value = currentInputValue.slice(0, -1)
 					}
 					break
+				case 'space':
+					if (inputRef.current) {
+						inputRef.current.value = `${currentInputValue} `
+					}
+					break
 				case 'enter':
 					if (inputRef.current) {
 						handleSubmit()
