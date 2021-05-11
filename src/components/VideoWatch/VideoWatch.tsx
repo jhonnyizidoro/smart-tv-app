@@ -20,7 +20,7 @@ const VideoWatch: FC<VideoWatchProps> = ({
 	const [videoIsPlaying, setVideoIsPlaying] = useState<boolean>(true)
 
 	const stopOrPlayVideo = useCallback(() => {
-		const action = videoIsPlaying ? 'stopVideo' : 'playVideo'
+		const action = videoIsPlaying ? 'pauseVideo' : 'playVideo'
 		ref.current?.contentWindow?.postMessage(
 			`{ "event": "command", "func": "${action}", "args": "" }`,
 			'*'
